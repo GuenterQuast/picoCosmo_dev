@@ -6,7 +6,7 @@
 This code relies on
 
   - the data acquisition and analysis package
-    picoDAQ, https://github.com/GuenterQuast/picoDAQ), which 
+    picoDAQ, https://github.com/GuenterQuast/picoDAQ, which 
     must be installed on your system, together with 
   - the  *python* bindings of the *pico-python* project by
     Colin O'Flynn, see https://github.com/colinoflynn/pico-python and 
@@ -22,10 +22,11 @@ the picoScope configuration and the filter settings:
 
    ./runCosmo DAQ_xxx.yaml
 
-     - DAQ_Cosmon.yaml : configuration for Cosmo-Panels
+     - DAQ_Cosmo.yaml : configuration for Cosmo-Panels
      - DAQ_Kanne.yaml : configuration for Kamiokanne
 
-`runCosmo` is tailored to identify short pulses from muon detectors (the scintillator panels of the *CosMO*-experiment by "Netzwerk Teilchenwelt",
+`runCosmo` is tailored to identify short pulses from muon detectors (the 
+scintillator panels of the *CosMO*-experiment by "Netzwerk Teilchenwelt",
 http://www.teilchenwelt.de, or the Kamiokanne-Experiment with
 photomultiplier readout and pulses shaped to a length of approx. 150ns). 
 
@@ -37,7 +38,40 @@ example, connect one, two or three panels to your PicoScope and type
 
   `./runCosmo.py DAQ_Cosmo.json` 
 
-In addition to a real-time display of waveforms and rates raw waveforms or
-pictures in .png-format of identified double pulses can be stored, for 
+
+In addition to  real-time display of wave forms and rates, raw wave forms or
+pictures in `.png`-format of identified double pulses can be stored, for 
 off-line analysis or for an an instructive analysis "by Hand" based on the
 waveform pictures.
+
+The available options are shown in this example of the configuration file `pFconfig.yaml`:
+
+    # Configuration file for pulseFilter
+    
+    #logFile: pFilt     # store all pulses, put Null if no output wanted
+    logFile: Null      # store all pulses, put Null if no output wanted
+    logFile2: dpFilt   # sore double-pulses only, put Null if not
+    rawFile:  rawDP    # store raw wave forms, put Null if not wanted
+    pictFile: pictDP   # save pictures of double-pulse wave forms
+
+    # pulse parameters
+    #         ______
+    #        /      \  
+    #     _ /_ _ _ _ \_ _ _ _ _ _ _   
+    #                 \__________/
+    #      r    on  f f2   off  r2 
+    #                 f2 - r2 for bi-polar only
+
+    pulseShape:
+     - taur   : 20.E-9
+       tauon  : 12.E-9 
+       tauf   : 128.E-9 
+       tauf2  : 0. 
+       tauoff : 0. 
+       taur2  : 0.
+       pheight: -0.045
+       mode   : 0             # 0:uni-polar  1: bipolar 
+
+    modules: [RMeter, Hists, Display]
+    #modules: [RMeter, Display]
+
