@@ -1,0 +1,7 @@
+# configuration for runDAQ.py with Kamiokanne 
+
+DeviceFile:    PMpulse.yaml
+BMfile:        BMconfig.yaml
+
+#DAQmodules:    [mpRMeter, mpVMeter] # other modules to start
+

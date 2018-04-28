@@ -1,0 +1,7 @@
+# configuration for runDAQ.py
+
+DeviceFile:     SiPMpulse.yaml
+BMfile:         BMconfig.yaml
+
+#DAQmodules: [mpRMeter, mpVMeter] # other modules to start
+
