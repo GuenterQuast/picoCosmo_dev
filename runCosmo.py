@@ -180,7 +180,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   from picodaqa.mpHists import mpHists
 
   # import analysis code as library
-  from pulseFilter import *
+  from picocosmo.pulseFilter import *
 
   pFconfFile = 'pFconfig.yaml'
   try:   # read config file

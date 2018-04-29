@@ -1,6 +1,6 @@
 # picoCosmo
 
-*python* scritp to analyze date from Cosmo Detectors and Kamiokanne 
+*python* scritp to analyze data from Cosmo Detectors and Kamiokanne 
  by Netzwerk Teilchenwelt with picoScope USB device
 
 This code relies on
