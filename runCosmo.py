@@ -43,6 +43,12 @@ from picodaqa.mpOsci import mpOsci
 from picodaqa.mpVMeter import mpVMeter
 from picodaqa.mpRMeter import mpRMeter
 
+# import pulse analyis
+from picocosmo.pulseFilter import *
+  # these display types are used by pulseFilter
+from picodaqa.mpBDisplay import mpBDisplay
+from picodaqa.mpHists import mpHists
+
 # !!!!
 # import matplotlib.pyplot as plt
 # !!!! matplot can only be used if no other active thread is using it 
@@ -94,10 +100,11 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     print('     no BM configuration file - exiting')
     exit(1)
 
-  if "ANAscript" in DAQconfdict: 
-    ANAscript = DAQconfdict["ANAscript"] # configuration file for user analysis 
+  if "PFfile" in DAQconfdict: 
+    PFfile = DAQconfdict["PFfile"] # Buffer Manager configuration file 
   else:
-    ANAscript = None
+    print('     no pulse filter configuration file - exiting')
+    exit(1)
 
   if 'DAQmodules' in DAQconfdict:
     modules = DAQconfdict["DAQmodules"]
@@ -123,6 +130,14 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
         BMconfdict=yaml.load(f)
   except:
    print('     failed to read BM input file ' + BMfile)
+   exit(1)
+
+  # read Pulse Filter configuration file
+  try:   
+    with open(PFfile) as f:
+      PFconfdict = yaml.load(f)
+  except:
+   print('     failed to read Pulse Filter input file ' + PFfile)
    exit(1)
 
 # initialisation
@@ -155,7 +170,12 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     modules = [modules]
 #
 
-# modules to be run as sub-processes
+  if 'modules' in PFconfdict:
+    PFmodules = PFconfdict['modules']
+  else:
+    PFmodules = ['RMeter', 'Hists', 'Display' ]
+
+# start all requested modules as sub-processes
 #             these use multiprocessing.Queue for data transfer
   thrds = []
   procs =[]
@@ -173,30 +193,11 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
               args=(VMmpQ, PSconf.OscConfDict, 500., 'effective Voltage') ) )
 #                         config interval name
 
-# code specific to Como detectors inserted 
-# ---> here 
-
-  from picodaqa.mpBDisplay import mpBDisplay
-  from picodaqa.mpHists import mpHists
-
-  # import analysis code as library
-  from picocosmo.pulseFilter import *
-
-  pFconfFile = 'pFconfig.yaml'
-  try:   # read config file
-    with open(pFconfFile) as f:
-      pFconfdict = yaml.load(f)
-  except: 
-     pFconfdict = None
-  if pFconfdict:
-    if 'modules' in pFconfdict:
-      pFmodules = pFconfdict['modules']
-    else:
-      pFmodules = ['RMeter', 'Hists', 'Display' ]
-
+# code specific to pulse analysis of Cosmo Detectors
+# ---> starts here 
 # pulse shape analysis
   filtRateQ = None
-  if 'RMeter' in pFmodules:
+  if 'RMeter' in PFmodules:
     filtRateQ = mp.Queue(1) # information queue for Filter
     procs.append(mp.Process(name='RMeter',
           target = mpRMeter, 
@@ -204,7 +205,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 #               mp.Queue  rate  update interval          
 
   histQ = None
-  if 'Hists' in pFmodules:
+  if 'Hists' in PFmodules:
     histQ = mp.Queue(1) # information queue for Filter
 #  book histograms and start histogrammer
     Hdescriptors = []
@@ -219,7 +220,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 #             data Queue, Hist.Desrc  interval    
 
   VSigQ = None
-  if 'Display' in pFmodules:
+  if 'Display' in PFmodules:
     VSigQ = mp.Queue(1) # information queue for Filter
     mode = 2 # 0:signed, 1: abs. 2: symmetric
     size = 1. # stretch factor for display
@@ -238,7 +239,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 
   # pulse analysis as sub-process
   procs.append(mp.Process(name='pulseFilter', target=pulseFilter, 
-       args = ( BM, cId, pFconfdict, filtRateQ, histQ, VSigQ, True, 1) ) )
+       args = ( BM, cId, PFconfdict, filtRateQ, histQ, VSigQ, True, 1) ) )
 #              BMclientId  config    RMeterQ  histQ  fileout verbose    
 
 #   could also run this in main thread
