@@ -51,7 +51,7 @@ on the waveform pictures.
     <https://www.picotech.com/library/oscilloscopes/picoscope-software-development-kit-sdk>.
   - Install the `pico-pyhton` package from   
     <https://github.com/colinoflynn/pico-python>.
-  - Install the picoDAQ package from 
+  - Install the picoDAQ package, vers. >= 0.7.2 from 
     <https://github.com/GuenterQuast/picoDAQ> 
   - Download all files from this project
     <https://github.com/GuenterQuast/picoCosmo> 
@@ -134,7 +134,7 @@ shown here:
 
     #logFile: pFilt     # store all pulses, put Null if no output wanted
     logFile: Null      # store all pulses, put Null if no output wanted
-    logFile2: dpFilt   # sore double-pulses only, put Null if not
+    logFile2: dpFilt   # store double-pulses only, put Null if not
     rawFile:  rawDP    # store raw wave forms, put Null if not wanted
     pictFile: pictDP   # save pictures of double-pulse wave forms
 
