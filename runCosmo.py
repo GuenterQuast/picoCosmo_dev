@@ -44,10 +44,7 @@ from picodaqa.mpVMeter import mpVMeter
 from picodaqa.mpRMeter import mpRMeter
 
 # import pulse analyis
-from picocosmo.pulseFilter import *
-  # these display types are used by pulseFilter
-from picodaqa.mpBDisplay import mpBDisplay
-from picodaqa.mpHists import mpHists
+from picocosmo.PulseFilter import *
 
 # !!!!
 # import matplotlib.pyplot as plt
@@ -193,73 +190,23 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
               args=(VMmpQ, PSconf.OscConfDict, 500., 'effective Voltage') ) )
 #                         config interval name
 
-# code specific to pulse analysis of Cosmo Detectors
-# ---> starts here 
-# pulse shape analysis
-  filtRateQ = None
-  if 'RMeter' in PFmodules:
-    filtRateQ = mp.Queue(1) # information queue for Filter
-    procs.append(mp.Process(name='RMeter',
-          target = mpRMeter, 
-          args=(filtRateQ, 12., 2500., 'muon rate history') ) )
-#               mp.Queue  rate  update interval          
-
-  histQ = None
-  if 'Hists' in PFmodules:
-    histQ = mp.Queue(1) # information queue for Filter
-#  book histograms and start histogrammer
-    Hdescriptors = []
-    Hdescriptors.append([0., 0.4, 50, 20., 'noise Trg. Pulse (V)', 0] )
-#                   min max nbins ymax    title               lin/log
-    Hdescriptors.append([0., 0.8, 50, 15., 'valid Trg. Pulse (V)', 0] )
-    Hdescriptors.append([0., 0.8, 50, 15., 'Pulse height (V)', 0] )
-    Hdescriptors.append([0., 15., 45, 7.5, 'Tau (µs)', 1] )
-    procs.append(mp.Process(name='Hists',
-          target = mpHists, 
-          args=(histQ, Hdescriptors, 2000., 'Filter Histograms') ) )
-#             data Queue, Hist.Desrc  interval    
-
-  VSigQ = None
-  if 'Display' in PFmodules:
-    VSigQ = mp.Queue(1) # information queue for Filter
-    mode = 2 # 0:signed, 1: abs. 2: symmetric
-    size = 1. # stretch factor for display
-    procs.append(mp.Process(name = 'ChannelSignals',
-          target = mpBDisplay, 
-          args=(VSigQ, PSconf, mode, size, 'Panel Signals') ) )
-#               mp.Queue Chan.Conf.           name          
-
-# run pulse analysis
-  cId = BM.BMregister() # get a Buffer Manager Client Id
-
-  # pulse analysis as thread
-  #thrds.append(threading.Thread(target=pulseFilter,
-  #      args = ( BM, PSconf, cId, filtRateQ, histQ, VSigQ, True, 1) ) )
-  #                      BMclientId  RMeterQ  histQ  fileout verbose    
-
-  # pulse analysis as sub-process
-  procs.append(mp.Process(name='pulseFilter', target=pulseFilter, 
-       args = ( BM, cId, PFconfdict, filtRateQ, histQ, VSigQ, True, 1) ) )
-#              BMclientId  config    RMeterQ  histQ  fileout verbose    
-
-#   could also run this in main thread
-  #pulseFilter( BM, PSconf, cId, filtRateQ, histQ, VSigQ, True, 1)  
-
-# <--- end of Cosmo-specific code 
-
-  if len(procs)==0 and len(thrds)==0 :
-    print ('!!! nothing to do - running BM only')
 # start all background processes   
   for prc in procs:
     prc.deamon = True
     prc.start()
     print(' -> starting process ', prc.name, ' PID=', prc.pid)
-  time.sleep(1.)
 # start threads
   for thrd in thrds:
     thrd.daemon = True
     thrd.start()
   time.sleep(1.) # wait for all threads to start, then ...
+
+# run PulseFilter: signal filtering and analysis
+  PF = PulseFilter( BM, PFconfdict, 1)
+  #                 BM   config   verbose    
+  PF.run()
+  time.sleep(1.)
+
 # ...start run
   BM.run() 
 
@@ -276,9 +223,13 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   except KeyboardInterrupt:
     print(sys.argv[0]+': keyboard interrupt - closing down ...')
     BM.end()  # shut down BufferManager
+    time.sleep(3.)
+    PF.end()
 
   finally:
 # END: code to clean up
     PSconf.closeDevice() # close down hardware device
     stop_processes(procs) # termnate background processes
+    PF.end()  # stop PulseFilter sub-processes
     print('finished cleaning up \n')
+    

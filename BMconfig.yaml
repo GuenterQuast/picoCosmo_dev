@@ -3,5 +3,7 @@
 NBuffers: 16                    # number of buffers to store raw waveforms
 BMmodules: [mpBufInfo, mpOsci]  # BufferMan modules to start
 
+verbose: 2
+
 LogFile: BMsum
 

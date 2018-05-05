@@ -1,4 +1,4 @@
-# Configuration file for pulseFilter
+# Configuration file for PulseFilter
 
 #logFile: pFilt     # store all pulses, put Null if no output wanted
 logFile: Null      # store all pulses, put Null if no output wanted
@@ -15,6 +15,7 @@ pictFile: pictDP   # save pictures of double-pulse waveforms
 #                 f2 - r2 for bi-polar only
 
 pulseShape:
+# trigger pulse
  - taur   : 20.E-9
    tauon  : 12.E-9 
    tauf   : 128.E-9 
@@ -24,8 +25,24 @@ pulseShape:
    pheight: -0.045
    mode   : 0             # 0:uni-polar  1: bipolar 
 
+# other pulses
+ - taur   : 20.E-9
+   tauon  : 12.E-9 
+   tauf   : 128.E-9 
+   tauf2  : 0. 
+   tauoff : 0. 
+   taur2  : 0.
+   pheight: -0.035
+   mode   : 0             # 0:uni-polar  1: bipolar 
 
-modules: [RMeter, Hists, Display]
-#modules: [RMeter, Display]
+modules: [RMeter, Display, Hists]
 
-## not yet used! analysisLevel: 2   # 0: trg valid, 1: coinc. 2: double pulses
+histograms:
+ - [0., 0.4, 50, 20., "noise Trg. Pulse (V)", 0]
+  # min max Nbins ymax    title              lin/log
+ - [0., 0.8, 50, 15., "valid Trg. Pulse (V)", 0]
+ - [0., 15.,  45, 7.5, "Tau (µs)", 1]
+# - [0., 0.8, 50, 15., "Pulse Height (V)", 0]
+
+doublePulse: True  # switch to control double-pulse search
+
