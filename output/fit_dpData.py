@@ -40,8 +40,8 @@ def negLogL(p, f, x, *args, **kwargs):
 largv = len(sys.argv)
 if largv>=2:
   infile=sys.argv[1]
-  dtmin=0.15 # min. distance for pulse shape of 150ns
-  dtmax=15.0 # Kanne
+  dtmin=1.5  # range of useful pulses distances
+  dtmax=15.0 # 
   if largv>=3: dtmin= float(sys.argv[2])
   if largv>=4: dtmax= float(sys.argv[3])
 else:

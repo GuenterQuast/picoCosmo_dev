@@ -3,8 +3,8 @@
 #logFile: pFilt     # store all pulses, put Null if no output wanted
 logFile: Null      # store all pulses, put Null if no output wanted
 logFile2: dpFilt   # store double-pulses only, put Null if not wanted
-rawFile:  rawDP    # store raw wave forms, put Null if not wanted
-pictFile: pictDP   # save pictures of double-pulse waveforms
+rawFile:  dpRaw    # store raw wave forms, put Null if not wanted
+pictFile: dpFigs   # save pictures of double-pulse waveforms
 
 # pulse parameters
 #         ______
