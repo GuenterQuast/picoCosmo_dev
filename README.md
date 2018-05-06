@@ -62,14 +62,14 @@ xxx is the name of the configuration you want to use, either
 `Cosmo` for the CosMO panels, or `Kanne` for the "Kamiokanne"   
 detector. Control is performed via the main window of the
 BufferManager, which contains the options `Pause`, `Resume`,
-`Stop` and `Endrun`. In stopped state, all windows remain open
-and Graphs may be saved and log-output inspcted. In End-state,
-all processes are stopped, and conseqently all windows disappear.
+`Stop` and `EndRun`. In stopped state, all windows remain open
+and Graphs may be saved and log-output inspected. In End-state,
+all processes are stopped, and consequently all windows disappear.
 Resume running from Stop-state is presently not foreseen. 
 
 A helper script, plotDoublePulses.py, allow to read in stored
 raw waveforms from the double-pulse search and display as an
-oscilloscope display. Code to store each pictrure as a `.png`
+oscilloscope display. Code to store each picture as a `.png`
 is included, but commented out.
 
 The configuration for the `runCosmo.py` is defined in several '.yaml' files. The fist one contains the overall configuration and specifies
@@ -180,4 +180,16 @@ shown here:
 
     doublePulse: True  # switch for double-pulse search
 
-   
+
+## Example output
+The directory `./output` contains the results from a long run of almost
+20 days with the Kamiokanne detector. The compressed file `rawDP_180403.dat.zip` contains the raw wave forms of identified double-pulses in `yaml`-format. The script `plotDoublePulses.py` can be used to read the unzipped file and to produce displays of the waveforms. These
+pictures are also contained in the compressed file `dpFigs-180403.zip`.
+The parameters of events with double-pulses are stored in 
+file dpKanne2_180403.dat. An unbinnded logLikelihood fit of measured
+lifetimes between 1.5 µs and 15. µs with the script `fit_dpData.py`
+yields the result shown in figure `life-ofMU_180403.png`.    
+
+
+
+
