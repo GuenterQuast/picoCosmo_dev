@@ -30,9 +30,12 @@ scintillator panels of the *CosMO*-experiment by "Netzwerk Teilchenwelt",
 http://www.teilchenwelt.de, or the Kamiokanne-Experiment with
 photomultiplier readout and pulses shaped to a length of approx. 150ns). 
 
-In a first step, the trigger is validated by cross-correlation with a signal template located around the trigger time. Coincidences near a validated triggering pulse are searched for in all connected channels. 
+In a first step, the trigger is validated by cross-correlation with a 
+signal template located around the trigger time. Coincidences near a
+validated triggering pulse are searched for in all connected channels. 
 The third step performs a search for additional pulses after the
-triggering event, indicating the decay of a stopped muon in or near the detector. This simple set-up allows to measure the mean muon lifetime
+triggering event, indicating the decay of a stopped muon in or near the
+detector. This simple set-up allows to measure the mean muon lifetime
 in the muon rest frame (2.2 µs). To run the example, connect one, two
 or three panels to your PicoScope and type
 
@@ -54,7 +57,12 @@ on the waveform pictures.
   - Install the picoDAQ package, vers. >= 0.7.2 from 
     <https://github.com/GuenterQuast/picoDAQ> 
   - Download all files from this project
-    <https://github.com/GuenterQuast/picoCosmo> 
+    <https://github.com/GuenterQuast/picoCosmo>
+     
+For your convenience, the sub-directory `whl/` contains the
+compatible versions of `picoscope` from package `pico-pyhton`
+and `picodaqa` from package `picoDAQ` as python-wheels, which
+you may install via *pip install package-<vers\>-<tags\>.whl*.
 
 ## Configuration and program execution
 To start the program, type `./runCosmo DAQ_xxxx.yaml`, where  
@@ -72,7 +80,8 @@ raw waveforms from the double-pulse search and display as an
 oscilloscope display. Code to store each picture as a `.png`
 is included, but commented out.
 
-The configuration for the `runCosmo.py` is defined in several '.yaml' files. The fist one contains the overall configuration and specifies
+The configuration for the `runCosmo.py` is defined in several '.yaml' files. 
+The fist one contains the overall configuration and specifies
 configurations for the oscilloscope, the BufferManager and the Pulse
 Filter.  Here is the example to run with Kamiokanne:
 
@@ -183,10 +192,14 @@ shown here:
 
 ## Example output
 The directory `./output` contains the results from a long run of almost
-20 days with the Kamiokanne detector. The compressed file `rawDP_180403.dat.zip` contains the raw wave forms of identified double-pulses in `yaml`-format. The script `plotDoublePulses.py` can be used to read the unzipped file and to produce displays of the waveforms. These
-pictures are also contained in the compressed file `dpFigs-180403.zip`.
-The parameters of events with double-pulses are stored in 
-file dpKanne2_180403.dat. An unbinnded logLikelihood fit of measured
+20 days with the Kamiokanne detector. The compressed file `rawDP_180403.dat.zip`
+contains the raw wave forms of identified double-pulses in `yaml`-format. The
+script `plotDoublePulses.py` can be used to read the unzipped file and to
+produce graphical displays of the waveforms. These pictures are also contained
+in the compressed file `dpFigs-180403.zip`. 
+
+The parameters of events with double-pulses are stored in file
+dpKanne2_180403.dat. An unbinned log-likelihood fit of measured
 lifetimes between 1.5 µs and 15. µs with the script `fit_dpData.py`
 yields the result shown in figure `life-ofMU_180403.png`.    
 
