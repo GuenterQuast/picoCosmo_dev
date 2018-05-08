@@ -1,5 +1,7 @@
 # PicoScope configuration for three channles with DESY Panels
 
+PSmodel: 2000a      # model type (2000a is default)
+
 picoChannels: [A, B, C]
 ChanModes:     [AC, AC, AC]
 ##picoChannels: [A, B]
