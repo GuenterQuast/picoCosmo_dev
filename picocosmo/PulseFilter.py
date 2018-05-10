@@ -239,7 +239,7 @@ class PulseFilter(object):
         logFile = self.confDict['logFile']
         if logFile == None: logFile = None
       else:
-        logFile = 'PFilt'
+        logFile = 'None'
 
       if "logFile2" in self.confDict:
         logFile2 = self.confDict['logFile2']

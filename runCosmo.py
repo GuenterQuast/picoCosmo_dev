@@ -141,6 +141,12 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   print(' -> initializing PicoScope')
 
 # configure and initialize PicoScope
+  # set appropriate defaults for this use-case
+  if 'frqSG' not in PSconfdict:
+    PSconfdict['frqSG'] = 0.
+  if 'trgTO' not in PSconfdict:
+    PSconfdict['trgTO'] = 5000
+    
   PSconf = picodaqa.picoConfig.PSconfig(PSconfdict)
   PSconf.init()
   # copy some of the important configuration variables ...

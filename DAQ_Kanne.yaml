@@ -4,5 +4,3 @@ DeviceFile:    PMpulse.yaml
 BMfile:        BMconfig.yaml
 PFfile:        PFconfig.yaml
 
-#DAQmodules:    [mpRMeter, mpVMeter] # other modules to start
-
