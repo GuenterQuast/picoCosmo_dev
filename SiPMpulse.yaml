@@ -13,7 +13,7 @@ Nsamples: 3500
 sampleTime: 16.E-6
 
 trgChan: A
-trgThr: -30.E-3
+trgThr: -40.E-3
 trgTyp: Falling
 pretrig: 0.05
 

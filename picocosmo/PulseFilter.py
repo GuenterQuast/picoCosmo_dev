@@ -237,9 +237,8 @@ class PulseFilter(object):
 
       if "logFile" in self.confDict:
         logFile = self.confDict['logFile']
-        if logFile == None: logFile = None
       else:
-        logFile = 'None'
+        logFile = None
 
       if "logFile2" in self.confDict:
         logFile2 = self.confDict['logFile2']
@@ -284,9 +283,8 @@ class PulseFilter(object):
 # open and initialize output files
     datetime=time.strftime('%y%m%d-%H%M', time.localtime())
     if logFile is not None:
-#    logf=None
       self.logf = open(logFile + '_' + datetime+'.dat', 'w')
-      print("# EvNr, EvT, Vs ...., Ts ...T", 
+      print("# EvNr, EvT, Vs ...., Ts ...", 
         file=self.logf) # header line
     else:
       self.logf = None
@@ -626,7 +624,7 @@ class PulseFilter(object):
 
     if self.pDir is not None:
       # put all figures in one zip-file 
-      pass
+      pass # not yet implemented
 
     return
 #-end PulseFilter.PAnalysis()
