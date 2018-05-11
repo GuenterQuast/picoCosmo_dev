@@ -14,6 +14,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+         
+        monofont = QtGui.QFont()
+        monofont.setStyleHint(QtGui.QFont.TypeWriter)
+        monofont.setFamily("unexistentfont")        
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(487, 530)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -39,13 +44,16 @@ class Ui_MainWindow(object):
         self.tabWidget.setMinimumSize(QtCore.QSize(811, 0))
         self.tabWidget.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.tabWidget.setObjectName("tabWidget")
+
         self.OsciConfig = QtWidgets.QWidget()
         self.OsciConfig.setObjectName("OsciConfig")
         self.pTE_OsciConfig = QtWidgets.QPlainTextEdit(self.OsciConfig)
         self.pTE_OsciConfig.setGeometry(QtCore.QRect(10, 10, 481, 471))
         self.pTE_OsciConfig.setReadOnly(True)
+        self.pTE_OsciConfig.setFont(monofont)
         self.pTE_OsciConfig.setObjectName("pTE_OsciConfig")
         self.tabWidget.addTab(self.OsciConfig, "")
+
         self.BMconfig = QtWidgets.QWidget()
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -56,15 +64,19 @@ class Ui_MainWindow(object):
         self.pTE_BMconfig = QtWidgets.QPlainTextEdit(self.BMconfig)
         self.pTE_BMconfig.setGeometry(QtCore.QRect(10, 10, 481, 461))
         self.pTE_BMconfig.setReadOnly(True)
+        self.pTE_BMconfig.setFont(monofont)
         self.pTE_BMconfig.setObjectName("pTE_BMconfig")
         self.tabWidget.addTab(self.BMconfig, "")
+
         self.PulseFilterConfig = QtWidgets.QWidget()
         self.PulseFilterConfig.setObjectName("PulseFilterConfig")
         self.pTE_PFconfig = QtWidgets.QPlainTextEdit(self.PulseFilterConfig)
         self.pTE_PFconfig.setGeometry(QtCore.QRect(10, 10, 481, 461))
         self.pTE_PFconfig.setReadOnly(True)
+        self.pTE_PFconfig.setFont(monofont)
         self.pTE_PFconfig.setObjectName("pTE_PFconfig")
         self.tabWidget.addTab(self.PulseFilterConfig, "")
+
         self.pB_StartRun = QtWidgets.QPushButton(self.centralwidget)
         self.pB_StartRun.setGeometry(QtCore.QRect(307, 490, 171, 34))
         self.pB_StartRun.setObjectName("pB_StartRun")
