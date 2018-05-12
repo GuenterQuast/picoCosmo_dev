@@ -76,7 +76,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   if len(sys.argv)==2:
     DAQconfFile = sys.argv[1]
   else: 
-    DAQconfFile = 'DAQconfig.yaml'
+    DAQconfFile = 'default.daq'
   print('    DAQconfiguration from file ' + DAQconfFile)
   try:
     with open(DAQconfFile) as f:

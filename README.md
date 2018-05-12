@@ -27,8 +27,9 @@ the picoScope configuration and the filter settings:
 
 `runCosmo` is tailored to identify short pulses from muon detectors (the 
 scintillator panels of the *CosMO*-experiment by "Netzwerk Teilchenwelt",
-http://www.teilchenwelt.de, or the Kamiokanne-Experiment with
-photomultiplier readout and pulses shaped to a length of approx. 150ns). 
+http://www.teilchenwelt.de, or the *Kamiokanne*-Experiment with
+photomultiplier readout ( in the examples shown below the pulses were
+shaped to a length of approx. 150 ns). 
 
 In a first step, the trigger is validated by cross-correlation with a 
 signal template located around the trigger time. Coincidences near a
@@ -41,11 +42,15 @@ or three panels to your PicoScope and type
 
   `./runCosmo.py DAQ_Cosmo.json` 
 
+Real-time displays of waveforms and rates are provide. In addition, raw
+waveforms or pictures in `.png`-format of identified double pulses can
+optionally  be stored for off-line analysis or for an instructive analysis "by Hand" based on the waveform pictures.
 
-In addition to a real-time display of waveforms and rates, raw waveforms
-or pictures in `.png`-format of identified double pulses can be stored,
-for off-line analysis or for an instructive analysis "by Hand" based
-on the waveform pictures.
+## Graphical Interface 
+
+A graphical interface, `CosmoGui.py` allows to inspect and modify the 
+configuration and start a new run. Configuration and output files are
+stored in a newly created directory `<Run Tag>_<date>/`, where a specific `<Run Tag>` can be specified by the user. 
 
 
 ##Installation
@@ -55,9 +60,9 @@ on the waveform pictures.
   - Install the `pico-pyhton` package from   
     <https://github.com/colinoflynn/pico-python>.
   - Install the picoDAQ package, vers. >= 0.7.2 from 
-    <https://github.com/GuenterQuast/picoDAQ> 
+    <https://github.com/GuenterQuast/picoDAQ>. 
   - Download all files from this project
-    <https://github.com/GuenterQuast/picoCosmo>
+    <https://github.com/GuenterQuast/picoCosmo>.
      
 For your convenience, the sub-directory `whl/` contains the
 compatible versions of `picoscope` from package `pico-pyhton`
@@ -65,33 +70,40 @@ and `picodaqa` from package `picoDAQ` as python-wheels, which
 you may install via *pip install package-<vers\>-<tags\>.whl*.
 
 ## Configuration and program execution
-To start the program, type `./runCosmo DAQ_xxxx.yaml`, where  
-xxx is the name of the configuration you want to use, either
-`Cosmo` for the CosMO panels, or `Kanne` for the "Kamiokanne"   
-detector. Control is performed via the main window of the
+
+Data Acquisition and Analysis can be started using the graphical
+interface by typing `./CosmoGui.py xxx.daq`, or  optionally, by
+directly starting the pyhton script for run execution with the
+command `./runCosmo xxxx.daq`.   
+Here, `xxx` is the name of the configuration you want to use, either
+`Cosmo` for the CosMO panels, or `Kanne` for the `Kamiokanne`   
+detector. 
+
+After run start, control is performed via the main window of the
 BufferManager, which contains the options `Pause`, `Resume`,
 `Stop` and `EndRun`. In stopped state, all windows remain open
-and Graphs may be saved and log-output inspected. In End-state,
+and graphs may be saved and log-output inspected. In End-state,
 all processes are stopped, and consequently all windows disappear.
 Resume running from Stop-state is presently not foreseen. 
 
 A helper script, plotDoublePulses.py, allow to read in stored
-raw waveforms from the double-pulse search and display as an
+raw waveforms from the double-pulse search and display them as an
 oscilloscope display. Code to store each picture as a `.png`
 is included, but commented out.
 
-The configuration for the `runCosmo.py` is defined in several '.yaml' files. 
-The fist one contains the overall configuration and specifies
-configurations for the oscilloscope, the BufferManager and the Pulse
-Filter.  Here is the example to run with Kamiokanne:
+The configuration for the `runCosmo.py` is defined in several '.yaml' files contained in sub-directory `config/`. The files used for
+a specific configuration are listed in files of type `.daq`, e.g. `Kanne.daq` for Kamiokanne and `Cosmo.daq` for a run with the 
+CosMo panels. 
 
-    # file DAQ_Kanne.yaml
+The  `.yaml` files specify configurations for the oscilloscope, the BufferManager and the Pulse Filter. Here is the example to run with Kamiokanne:
+
+    # file Kanne.daq
     # --------------------
-    # configuration for runDAQ.py with Kamiokanne 
+    # configuration files for Kamiokanne 
 
-    DeviceFile:    PMpulse.yaml     # Oscilloscope configuration file
-    BMfile:        BMconfig.yaml    # Buffer Manager configuration
-    PFfile:        PFconfig.yaml    # Pulse Filter Configuration 
+    DeviceFile: config/PMpulse.yaml   # Oscilloscope configuration file
+    BMfile:     config/BMconfig.yaml  # Buffer Manager configuration
+    PFfile:     config/PFconfig.yaml  # Pulse Filter Configuration 
 
 The oscilloscope configuration specifies the oscilloscope model,
  the active channels and the trigger conditions:
@@ -103,7 +115,6 @@ The oscilloscope configuration specifies the oscilloscope model,
     PSmodel: 2000a      # model type here (2000a is default)
 
     picoChannels:      [A]
-    ## picoChannels:     [A, B]
     ChanRanges:        [0.5, 0.2]
     ChanOffsets:       [0.4, 0.45]
 
@@ -113,11 +124,10 @@ The oscilloscope configuration specifies the oscilloscope model,
     trgChan:    A
     trgThr:     -45.E-3
     trgTyp:     Falling
-    trgTO:      5000
+    trgTO:      5000    #   time-out after which read-out occurs
     pretrig:    0.05
     ChanColors: [darkblue, sienna, indigo]
 
-    frqSG: 0.0  # internal wavefrom generator off
 
 The configuration for the Buffer manager allows to specify the   
 display modules for raw data or logging levels:  
@@ -128,9 +138,7 @@ display modules for raw data or logging levels:
 
     NBuffers: 16         # number of buffers to store raw waveforms
     BMmodules: [mpOsci]  # BufferMan modules to start
-
-    verbose: 2   # set verbosity level
-
+    verbose: 1   # set verbosity level
     LogFile: BMsum # write log-file entries with current statistics
 
 The configuration for running with the CosMO detectors or Kamiokanne
@@ -139,7 +147,7 @@ shown here:
 
     # file PFconfig.yaml
     # -------------------
-    # Configuration file for PulseFilter
+    # Configuration file for PulseFilter with Kamiokanne
 
     #logFile: pFilt     # store all pulses, put Null if no output wanted
     logFile: Null      # store all pulses, put Null if no output wanted
@@ -191,18 +199,16 @@ shown here:
 
 
 ## Example output
-The directory `./output` contains the results from a long run of almost
-20 days with the Kamiokanne detector. The compressed file `rawDP_180403.dat.zip`
-contains the raw wave forms of identified double-pulses in `yaml`-format. The
-script `plotDoublePulses.py` can be used to read the unzipped file and to
-produce graphical displays of the waveforms. These pictures are also contained
-in the compressed file `dpFigs-180403.zip`. 
 
-The parameters of events with double-pulses are stored in file
+The directory `./output` contains the results from a long run of almost
+20 days with the Kamiokanne detector and a one-day run with the CosMO
+panels. The compressed files `rawDP_<date>.dat.zip` contain the 
+raw wave forms of identified double-pulses in `yaml`-format. The
+script `plotDoublePulses.py` can be used to read the unzipped file and to
+produce graphical displays of the waveforms. These pictures are also contained in the compressed file `dpFigs-<date>.zip`. 
+
+The parameters of events containing double-pulses are stored in file
 dpKanne2_180403.dat. An unbinned log-likelihood fit of measured
 lifetimes between 1.5 µs and 15. µs with the script `fit_dpData.py`
 yields the result shown in figure `life-ofMU_180403.png`.    
-
-
-
 
