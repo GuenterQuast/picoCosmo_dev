@@ -1,0 +1,7 @@
+# configuration for runDAQ.py
+
+DeviceFile:     SiPMpulse.yaml
+BMfile:         BMconfig.yaml
+PFfile:         PFcosmo.yaml
+
+

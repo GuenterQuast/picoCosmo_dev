@@ -1,0 +1,6 @@
+# configuration for runDAQ.py with Kamiokanne 
+
+DeviceFile:    PMpulse.yaml
+BMfile:        BMconfig.yaml
+PFfile:        PFconfig.yaml
+

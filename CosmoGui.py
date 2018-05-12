@@ -10,13 +10,12 @@ import sys, os, time, yaml, threading, subprocess
 
 # Form implementation generated from reading ui file 'CosmoGui.ui'
 #    Created by: PyQt5 UI code generator 5.5.1
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_CosmoWindow(object):
     def setupUi(self, CosmoWindow):
         CosmoWindow.setObjectName("CosmoWindow")
-        CosmoWindow.resize(500, 515)
+        CosmoWindow.resize(512, 537)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -29,9 +28,56 @@ class Ui_CosmoWindow(object):
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
         self.centralwidget.setSizePolicy(sizePolicy)
         self.centralwidget.setObjectName("centralwidget")
-        self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
+        self.tab_Main = QtWidgets.QTabWidget(self.centralwidget)
+        self.tab_Main.setGeometry(QtCore.QRect(0, 0, 521, 541))
+        self.tab_Main.setToolTip("")
+        self.tab_Main.setStatusTip("")
+        self.tab_Main.setObjectName("tab_Main")
+        self.Tab_Control = QtWidgets.QWidget()
+        self.Tab_Control.setWhatsThis("")
+        self.Tab_Control.setObjectName("Tab_Control")
+        self.label_Picture = QtWidgets.QLabel(self.Tab_Control)
+        self.label_Picture.setGeometry(QtCore.QRect(210, 60, 281, 251))
+        self.label_Picture.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.label_Picture.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.label_Picture.setText("")
+        self.label_Picture.setPixmap(QtGui.QPixmap("images/picoCosmo_iconic.jpg"))
+        self.label_Picture.setObjectName("label_Picture")
+        self.label_caption = QtWidgets.QLabel(self.Tab_Control)
+        self.label_caption.setGeometry(QtCore.QRect(200, 40, 301, 18))
+        self.label_caption.setObjectName("label_caption")
+        self.label_DAQconfig = QtWidgets.QLabel(self.Tab_Control)
+        self.label_DAQconfig.setGeometry(QtCore.QRect(10, 340, 101, 30))
+        self.label_DAQconfig.setObjectName("label_DAQconfig")
+        self.lE_DAQConfFile = QtWidgets.QLineEdit(self.Tab_Control)
+        self.lE_DAQConfFile.setGeometry(QtCore.QRect(110, 340, 331, 32))
+        self.lE_DAQConfFile.setText("")
+        self.lE_DAQConfFile.setReadOnly(True)
+        self.lE_DAQConfFile.setObjectName("lE_DAQConfFile")
+        self.label = QtWidgets.QLabel(self.Tab_Control)
+        self.label.setGeometry(QtCore.QRect(50, 390, 51, 30))
+        self.label.setObjectName("label")
+        self.lE_RunTag = QtWidgets.QLineEdit(self.Tab_Control)
+        self.lE_RunTag.setGeometry(QtCore.QRect(110, 390, 113, 31))
+        self.lE_RunTag.setObjectName("lE_RunTag")
+        self.pB_StartRun = QtWidgets.QPushButton(self.Tab_Control)
+        self.pB_StartRun.setGeometry(QtCore.QRect(400, 430, 101, 40))
+        self.pB_StartRun.setObjectName("pB_StartRun")
+        self.label_MainPanel = QtWidgets.QLabel(self.Tab_Control)
+        self.label_MainPanel.setGeometry(QtCore.QRect(0, 0, 151, 41))
+        self.label_MainPanel.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.label_MainPanel.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.label_MainPanel.setLineWidth(3)
+        self.label_MainPanel.setObjectName("label_MainPanel")
+        self.pB_FileSelect = QtWidgets.QPushButton(self.Tab_Control)
+        self.pB_FileSelect.setGeometry(QtCore.QRect(444, 340, 61, 34))
+        self.pB_FileSelect.setObjectName("pB_FileSelect")
+        self.tab_Main.addTab(self.Tab_Control, "")
+        self.Tab_Config = QtWidgets.QWidget()
+        self.Tab_Config.setObjectName("Tab_Config")
+        self.tabWidget = QtWidgets.QTabWidget(self.Tab_Config)
         self.tabWidget.setEnabled(True)
-        self.tabWidget.setGeometry(QtCore.QRect(-10, 0, 881, 461))
+        self.tabWidget.setGeometry(QtCore.QRect(0, 40, 811, 471))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -43,7 +89,7 @@ class Ui_CosmoWindow(object):
         self.OsciConfig = QtWidgets.QWidget()
         self.OsciConfig.setObjectName("OsciConfig")
         self.pTE_OsciConfig = QtWidgets.QPlainTextEdit(self.OsciConfig)
-        self.pTE_OsciConfig.setGeometry(QtCore.QRect(10, 10, 491, 471))
+        self.pTE_OsciConfig.setGeometry(QtCore.QRect(10, 10, 491, 411))
         self.pTE_OsciConfig.setReadOnly(True)
         self.pTE_OsciConfig.setObjectName("pTE_OsciConfig")
         self.tabWidget.addTab(self.OsciConfig, "")
@@ -55,40 +101,51 @@ class Ui_CosmoWindow(object):
         self.BMconfig.setSizePolicy(sizePolicy)
         self.BMconfig.setObjectName("BMconfig")
         self.pTE_BMconfig = QtWidgets.QPlainTextEdit(self.BMconfig)
-        self.pTE_BMconfig.setGeometry(QtCore.QRect(10, 10, 491, 461))
+        self.pTE_BMconfig.setGeometry(QtCore.QRect(10, 10, 491, 411))
         self.pTE_BMconfig.setReadOnly(True)
         self.pTE_BMconfig.setObjectName("pTE_BMconfig")
         self.tabWidget.addTab(self.BMconfig, "")
         self.PulseFilterConfig = QtWidgets.QWidget()
         self.PulseFilterConfig.setObjectName("PulseFilterConfig")
         self.pTE_PFconfig = QtWidgets.QPlainTextEdit(self.PulseFilterConfig)
-        self.pTE_PFconfig.setGeometry(QtCore.QRect(10, 10, 491, 461))
+        self.pTE_PFconfig.setGeometry(QtCore.QRect(10, 10, 491, 411))
         self.pTE_PFconfig.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.pTE_PFconfig.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.pTE_PFconfig.setReadOnly(True)
         self.pTE_PFconfig.setObjectName("pTE_PFconfig")
         self.tabWidget.addTab(self.PulseFilterConfig, "")
-        self.pB_StartRun = QtWidgets.QPushButton(self.centralwidget)
-        self.pB_StartRun.setGeometry(QtCore.QRect(390, 465, 101, 40))
-        self.pB_StartRun.setObjectName("pB_StartRun")
-        self.rB_EditMode = QtWidgets.QRadioButton(self.centralwidget)
-        self.rB_EditMode.setGeometry(QtCore.QRect(10, 456, 91, 30))
+        self.rB_EditMode = QtWidgets.QRadioButton(self.Tab_Config)
+        self.rB_EditMode.setGeometry(QtCore.QRect(410, 20, 91, 30))
         self.rB_EditMode.setObjectName("rB_EditMode")
-        self.lE_RunTag = QtWidgets.QLineEdit(self.centralwidget)
-        self.lE_RunTag.setGeometry(QtCore.QRect(259, 471, 113, 31))
-        self.lE_RunTag.setObjectName("lE_RunTag")
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(205, 471, 51, 30))
-        self.label.setObjectName("label")
+        self.label_ConfigPanel = QtWidgets.QLabel(self.Tab_Config)
+        self.label_ConfigPanel.setGeometry(QtCore.QRect(0, 0, 151, 41))
+        self.label_ConfigPanel.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.label_ConfigPanel.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.label_ConfigPanel.setLineWidth(3)
+        self.label_ConfigPanel.setTextFormat(QtCore.Qt.PlainText)
+        self.label_ConfigPanel.setObjectName("label_ConfigPanel")
+        self.tab_Main.addTab(self.Tab_Config, "")
         CosmoWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(CosmoWindow)
+        self.tab_Main.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(CosmoWindow)
 
     def retranslateUi(self, CosmoWindow):
         _translate = QtCore.QCoreApplication.translate
         CosmoWindow.setWindowTitle(_translate("CosmoWindow", "CosmoGui"))
+        self.Tab_Control.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>Control Panel</p></body></html>"))
+        self.label_caption.setText(_translate("CosmoWindow", "Kamiokanne & CosMO Detecotrs with PicoScope"))
+        self.label_DAQconfig.setText(_translate("CosmoWindow", "DAQ config file:"))
+        self.label.setText(_translate("CosmoWindow", "Run Tag:"))
+        self.lE_RunTag.setText(_translate("CosmoWindow", "CosmoRun"))
+        self.pB_StartRun.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>Start Runinng Oscilloscope, Buffer Manager and Pulse Filter</p></body></html>"))
+        self.pB_StartRun.setText(_translate("CosmoWindow", "StartRun"))
+        self.label_MainPanel.setText(_translate("CosmoWindow", "  Cosmo Control Panel"))
+        self.pB_FileSelect.setText(_translate("CosmoWindow", "select"))
+        self.tab_Main.setTabText(self.tab_Main.indexOf(self.Tab_Control), _translate("CosmoWindow", "Control"))
+        self.Tab_Config.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>Config Panel</p></body></html>"))
         self.tabWidget.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>Configuration Files</p></body></html>"))
         self.pTE_OsciConfig.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>Comnfiguration File for Oscilloscope</p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.OsciConfig), _translate("CosmoWindow", "OsciConfig"))
@@ -96,12 +153,9 @@ class Ui_CosmoWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.BMconfig), _translate("CosmoWindow", "BMconfig"))
         self.pTE_PFconfig.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>Configuration File for Pulse Filter and Analysis</p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.PulseFilterConfig), _translate("CosmoWindow", "PulseFilterConfig"))
-        self.pB_StartRun.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>Start Runinng Oscilloscope, Buffer Manager and Pulse Filter</p></body></html>"))
-        self.pB_StartRun.setText(_translate("CosmoWindow", "StartRun"))
         self.rB_EditMode.setText(_translate("CosmoWindow", "Edit Mode"))
-        self.lE_RunTag.setText(_translate("CosmoWindow", "CosmoRun"))
-        self.label.setText(_translate("CosmoWindow", "Run Tag:"))
-
+        self.label_ConfigPanel.setText(_translate("CosmoWindow", "   Configuration Panel"))
+        self.tab_Main.setTabText(self.tab_Main.indexOf(self.Tab_Config), _translate("CosmoWindow", "Configuration"))
 
 # --> code not generated by designer-qt5 and pyuic5 starts here --> 
 
@@ -116,6 +170,7 @@ class Ui_CosmoWindow(object):
 # define actions
         self.rB_EditMode.clicked.connect(self.actionEditConfig) 
         self.pB_StartRun.clicked.connect(self.actionStartRun) 
+        self.pB_FileSelect.clicked.connect(self.selectConfigFile)
 
     def actionEditConfig(self):
         checked = self.rB_EditMode.isChecked()
@@ -162,10 +217,55 @@ class Ui_CosmoWindow(object):
         print('*==* CosmoGui: ending')
         QtCore.QCoreApplication.instance().quit()
 
+    def selectConfigFile(self):
+      path2File = QtWidgets.QFileDialog.getOpenFileName(None,
+         'DAQ config', './', 'DAQ(*.daq)')
+      FileName = str(path2File[0])
+      if FileName is not '' :
+        # print('selected File ' + str(FileName) )
+        self.initDAQ(FileName)
+
     def spawn_runCosmo(self):
       # start runCosmo
       subprocess.call(['../runCosmo.py' + ' DAQconf.yaml'], 
                       cwd = self.runDir, shell = True)
+
+    def initDAQ(self, DAQconfFile):
+      try:
+        with open(DAQconfFile) as f:
+          DAQconfdict=yaml.load(f)
+      except:
+        print('     failed to read DAQ configuration file ' + DAQconfFile)
+        exit(1)
+
+      self.lE_DAQConfFile.setText(DAQconfFile)
+
+      if "DeviceFile" in DAQconfdict: 
+        PSfile = DAQconfdict["DeviceFile"] # configuration file for scope
+      else:
+        print('     no device configuration file - exiting')
+        exit(1)
+
+      if "BMfile" in DAQconfdict: 
+        BMfile = DAQconfdict["BMfile"] # Buffer Manager configuration file 
+      else:
+        print('     no BM configuration file - exiting')
+        exit(1)
+
+      if "PFfile" in DAQconfdict: 
+        PFfile = DAQconfdict["PFfile"] # Buffer Manager configuration file 
+      else:
+        print('     no pulse filter configuration file - exiting')
+        exit(1)
+
+   # initialization 
+      txt_OscConfig = open(PSfile, 'r').read()
+      txt_BMconfig = open(BMfile, 'r').read()
+      txt_PFconfig = open(PFfile, 'r').read()
+   # display config data in GUI
+      self.pTE_OsciConfig.setPlainText(txt_OscConfig)
+      self.pTE_BMconfig.setPlainText(txt_BMconfig)
+      self.pTE_PFconfig.setPlainText(txt_PFconfig)
 
 # - end Class Ui_CosmoWindow
 
@@ -178,48 +278,17 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - -
   if len(sys.argv)==2:
     DAQconfFile = sys.argv[1]
   else: 
-    DAQconfFile = 'DAQconfig.yaml'
+    DAQconfFile = 'default.daq'
   print('    DAQconfiguration from file ' + DAQconfFile)
-  try:
-    with open(DAQconfFile) as f:
-      DAQconfdict=yaml.load(f)
-  except:
-    print('     failed to read DAQ configuration file ' + DAQconfFile)
-    exit(1)
 
-  if "DeviceFile" in DAQconfdict: 
-    PSfile = DAQconfdict["DeviceFile"] # configuration file for scope
-  else:
-    print('     no device configuration file - exiting')
-    exit(1)
 
-  if "BMfile" in DAQconfdict: 
-    BMfile = DAQconfdict["BMfile"] # Buffer Manager configuration file 
-  else:
-    print('     no BM configuration file - exiting')
-    exit(1)
-
-  if "PFfile" in DAQconfdict: 
-    PFfile = DAQconfdict["PFfile"] # Buffer Manager configuration file 
-  else:
-    print('     no pulse filter configuration file - exiting')
-    exit(1)
-
-# initialization 
-  txt_OscConfig = open(PSfile, 'r').read()
-  txt_BMconfig = open(BMfile, 'r').read()
-  txt_PFconfig = open(PFfile, 'r').read()
-  
 # start GUI
   app = QtWidgets.QApplication(sys.argv)
   MainWindow = QtWidgets.QMainWindow()
   ui = Ui_CosmoWindow()
   ui.setupUi(MainWindow)
 
-# display config data in GUI
-  ui.pTE_OsciConfig.setPlainText(txt_OscConfig)
-  ui.pTE_BMconfig.setPlainText(txt_BMconfig)
-  ui.pTE_PFconfig.setPlainText(txt_PFconfig)
+  ui.initDAQ(DAQconfFile)
 
   MainWindow.show()
   sys.exit(app.exec_())
