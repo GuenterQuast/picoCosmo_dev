@@ -172,6 +172,14 @@ class Ui_CosmoWindow(object):
         self.pB_StartRun.clicked.connect(self.actionStartRun) 
         self.pB_FileSelect.clicked.connect(self.selectConfigFile)
 
+    def selectConfigFile(self):
+      path2File = QtWidgets.QFileDialog.getOpenFileName(None,
+         'DAQ config', './', 'DAQ(*.daq)')
+      FileName = str(path2File[0])
+      if FileName is not '' :
+        # print('selected File ' + str(FileName) )
+        self.initDAQ(FileName)
+
     def actionEditConfig(self):
         checked = self.rB_EditMode.isChecked()
         self.pTE_OsciConfig.setReadOnly(not checked)
@@ -183,25 +191,29 @@ class Ui_CosmoWindow(object):
 
         # time stamp for this run
         datetime=time.strftime('%y%m%d-%H%M', time.localtime())
-        RunTag = str(self.lE_RunTag.text() )
+        RunTag = str(self.lE_RunTag.text() ).replace(' ','')
         self.runDir = (RunTag + '_' + datetime)
         if not os.path.exists(self.runDir): os.makedirs(self.runDir)
+        self.DAQfile = RunTag + '.daq'
 
         # retrieve configuration
         PSconf = self.pTE_OsciConfig.toPlainText() 
         BMconf = self.pTE_BMconfig.toPlainText() 
         PFconf = self.pTE_PFconfig.toPlainText() 
         # generate config files for new run in dedicated subdirectory
-        fPS = open(self.runDir + '/PSconf.yaml', 'w')
-        fBM = open(self.runDir + '/BMconf.yaml', 'w')
-        fPF = open(self.runDir + '/PFconf.yaml', 'w')
-        fDAQ = open(self.runDir + '/DAQconf.yaml', 'w')
+        PSfile = RunTag + '_PSconf.yaml'
+        BMfile = RunTag + '_BMconf.yaml'
+        PFfile = RunTag + '_PFconf.yaml'
+        fPS = open(self.runDir + '/' + PSfile, 'w')
+        fBM = open(self.runDir + '/' + BMfile, 'w')
+        fPF = open(self.runDir + '/' + PFfile, 'w')
+        fDAQ = open(self.runDir + '/' + self.DAQfile,'w')
         print(PSconf, file = fPS )
         print(BMconf, file = fBM )
         print(PFconf, file = fPF )
-        print('DeviceFile: PSconf.yaml \n' +
-              'BMfile: BMconf.yaml \n' +
-              'PFfile: PFconf.yaml \n',
+        print('DeviceFile: ' + PSfile + '\n' +
+              'BMfile: ' + BMfile + '\n' +
+              'PFfile: ' + PFfile + '\n',
                file = fDAQ )
         fDAQ.close()
         fPS.close()
@@ -217,17 +229,9 @@ class Ui_CosmoWindow(object):
         print('*==* CosmoGui: ending')
         QtCore.QCoreApplication.instance().quit()
 
-    def selectConfigFile(self):
-      path2File = QtWidgets.QFileDialog.getOpenFileName(None,
-         'DAQ config', './', 'DAQ(*.daq)')
-      FileName = str(path2File[0])
-      if FileName is not '' :
-        # print('selected File ' + str(FileName) )
-        self.initDAQ(FileName)
-
     def spawn_runCosmo(self):
       # start runCosmo
-      subprocess.call(['../runCosmo.py' + ' DAQconf.yaml'], 
+      subprocess.call(['../runCosmo.py ' + self.DAQfile], 
                       cwd = self.runDir, shell = True)
 
     def initDAQ(self, DAQconfFile):
