@@ -199,9 +199,9 @@ class PulseFilter(object):
       self.pheight[i] = refPulseDicts[i]['pheight'] 
 
     if self.verbose:
-      print('PF: pulse parameters set')
+      print('      PF: pulse parameters set')
       for i in range(Npulses):
-        print('  taur: %.3g, tauon: %.3g, tauf: %.3g, height: %.3g'\
+        print('       taur: %.3g, tauon: %.3g, tauf: %.3g, height: %.3g'\
          %(self.taur[i], self.tauon[i], self.tauf[i], self.pheight[i]) )
 
 # calculate thresholds for correlation analysis

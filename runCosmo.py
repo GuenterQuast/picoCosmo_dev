@@ -122,6 +122,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
     exit(1)
 
   # read Buffer Manager configuration file
+  print('    Buffer Manager configuration from file ' + BMfile)
   try:
     with open(BMfile) as f:
         BMconfdict=yaml.load(f)
@@ -130,6 +131,7 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
    exit(1)
 
   # read Pulse Filter configuration file
+  print('    Pulse Filter configuration from file ' + PFfile)
   try:   
     with open(PFfile) as f:
       PFconfdict = yaml.load(f)
@@ -178,36 +180,8 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   else:
     PFmodules = ['RMeter', 'Hists', 'Display' ]
 
-# start all requested modules as sub-processes
-#             these use multiprocessing.Queue for data transfer
-  thrds = []
-  procs =[]
-    
-  # rate display
-  if 'mpRMeter' in modules:
-    RMcidx, RMmpQ = BM.BMregister_mpQ()
-    procs.append(mp.Process(name='RMeter', target = mpRMeter, 
-              args=(RMmpQ, 75., 2500., 'trigger rate history') ) )
-#                       maxRate interval name
-  # Voltmeter display
-  if 'mpVMeter' in modules:
-    VMcidx, VMmpQ = BM.BMregister_mpQ()
-    procs.append(mp.Process(name='VMeter', target = mpVMeter, 
-              args=(VMmpQ, PSconf.OscConfDict, 500., 'effective Voltage') ) )
-#                         config interval name
-
-# start all background processes   
-  for prc in procs:
-    prc.deamon = True
-    prc.start()
-    print(' -> starting process ', prc.name, ' PID=', prc.pid)
-# start threads
-  for thrd in thrds:
-    thrd.daemon = True
-    thrd.start()
-  time.sleep(1.) # wait for all threads to start, then ...
-
 # run PulseFilter: signal filtering and analysis
+  print(' -> initializing PulseFilter')
   PF = PulseFilter( BM, PFconfdict, 1)
   #                 BM   config   verbose    
   PF.run()
@@ -235,7 +209,6 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
   finally:
 # END: code to clean up
     PSconf.closeDevice() # close down hardware device
-    stop_processes(procs) # termnate background processes
     PF.end()  # stop PulseFilter sub-processes
-    print('finished cleaning up \n')
+    print('*==* runCosmo: normal end')
     
