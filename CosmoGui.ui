@@ -86,7 +86,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Kamiokanne &amp; CosMO Detecotrs with PicoScope</string>
+       <string>Kamiokanne &amp; CosMO Detectors with PicoScope</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_DAQconfig">

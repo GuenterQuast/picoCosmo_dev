@@ -3,31 +3,9 @@
 *python* scritp to analyze data from Cosmo Detectors and Kamiokanne 
  by Netzwerk Teilchenwelt with picoScope USB device
 
-This code relies on
-
-  - the data acquisition and analysis package
-    picoDAQ, https://github.com/GuenterQuast/picoDAQ, which 
-    must be installed on your system, together with 
-  - the  *python* bindings of the *pico-python* project by
-    Colin O'Flynn, see https://github.com/colinoflynn/pico-python and 
-  - the low-level drivers and C-libraries contained in 
-    the Pico Technology Software Development Kit,
-    see  https://www.picotech.com/downloads
-
-The code is a specialised version of the example `runDAQ.py`
-in package picoDAQ.
-
-`runCosmo` is controlled by an input `.yaml` file specifying
-the picoScope configuration and the filter settings:
-
-   ./runCosmo DAQ_xxx.yaml
-
-     - DAQ_Cosmo.yaml : configuration for Cosmo-Panels
-     - DAQ_Kanne.yaml : configuration for Kamiokanne
-
-`runCosmo` is tailored to identify short pulses from muon detectors (the 
+The software is tailored to identify short pulses from muon detectors (the 
 scintillator panels of the *CosMO*-experiment by "Netzwerk Teilchenwelt",
-http://www.teilchenwelt.de, or the *Kamiokanne*-Experiment with
+<http://www.teilchenwelt.de>, or the *Kamiokanne*-Experiment with
 photomultiplier readout ( in the examples shown below the pulses were
 shaped to a length of approx. 150 ns). 
 
@@ -37,20 +15,50 @@ validated triggering pulse are searched for in all connected channels.
 The third step performs a search for additional pulses after the
 triggering event, indicating the decay of a stopped muon in or near the
 detector. This simple set-up allows to measure the mean muon lifetime
-in the muon rest frame (2.2 µs). To run the example, connect one, two
-or three panels to your PicoScope and type
+in the muon rest frame (2.2 µs). 
 
-  `./runCosmo.py DAQ_Cosmo.json` 
-
-Real-time displays of waveforms and rates are provide. In addition, raw
+Real-time displays of waveforms and rates are provided. In addition, raw
 waveforms or pictures in `.png`-format of identified double pulses can
 optionally  be stored for off-line analysis or for an instructive analysis "by Hand" based on the waveform pictures.
 
-## Graphical Interface 
+## Dependence on other packages
 
-A graphical interface, `CosmoGui.py` allows to inspect and modify the 
-configuration and start a new run. Configuration and output files are
-stored in a newly created directory `<Run Tag>_<date>/`, where a specific `<Run Tag>` can be specified by the user. 
+This code relies on
+
+  - the data acquisition and analysis package
+    picoDAQ, <https://github.com/GuenterQuast/picoDAQ>, which
+    must be installed on your system, together with
+  - the  *python* bindings of the *pico-python* project by Colin
+    O'Flynn, see <https://github.com/colinoflynn/pico-python> and
+  - the low-level drivers and C-libraries contained in
+    the Pico Technology Software Development Kit, see
+    <https://www.picotech.com/downloads>
+
+The code also runs on a Raspberry Pi. 
+
+## Program Execution
+
+The program may be started on the command line (`runCosmo.py`) or via a  
+graphical interface (`CosmoGui.py`)
+Both are controlled by an input file in `.yaml` format, specifying
+configuration of the the PicoScope device, the Buffer Manager and the   
+pulse filter:
+
+   ./runCosmo xxx.daq
+
+     - Cosmo.daq : configuration for Cosmo-Panels
+     - Kanne.daq : configuration for Kamiokanne
+These files contain the names of the files containing the configurations
+for the PicoScope device, the Buffer Manager and the Pulse Filter.
+
+The graphical interface can also be initialized with a configuration file:
+
+   ./CosmoGui xxx.daq
+Alternatively, the configuration file can be selected and edited in the  
+graphical interface. 
+
+The graphical interface allows to inspect and modify the configuration and to start a new run. Configuration and output files are
+stored in a newly created directory `<Run Tag>_<date>/`, where a specific `<Run Tag>` can be specified by the user.
 
 
 ##Installation
@@ -63,21 +71,18 @@ stored in a newly created directory `<Run Tag>_<date>/`, where a specific `<Run 
     <https://github.com/GuenterQuast/picoDAQ>. 
   - Download all files from this project
     <https://github.com/GuenterQuast/picoCosmo>.
-     
-For your convenience, the sub-directory `whl/` contains the
+
+For your convenience, the sub-directory `whl/` contains
 compatible versions of `picoscope` from package `pico-pyhton`
 and `picodaqa` from package `picoDAQ` as python-wheels, which
 you may install via *pip install package-<vers\>-<tags\>.whl*.
 
 ## Configuration and program execution
 
-Data Acquisition and Analysis can be started using the graphical
-interface by typing `./CosmoGui.py xxx.daq`, or  optionally, by
-directly starting the pyhton script for run execution with the
-command `./runCosmo xxxx.daq`.   
-Here, `xxx` is the name of the configuration you want to use, either
-`Cosmo` for the CosMO panels, or `Kanne` for the `Kamiokanne`   
-detector. 
+As stated above, data Acquisition and Analysis is started using the
+graphical interface by typing `./CosmoGui.py xxx.daq`, or optionally, 
+by directly starting the pyhton script for run execution with the
+command `./runCosmo xxxx.daq`.
 
 After run start, control is performed via the main window of the
 BufferManager, which contains the options `Pause`, `Resume`,
@@ -202,7 +207,7 @@ shown here:
 
 The directory `./output` contains the results from a long run of almost
 20 days with the Kamiokanne detector and a one-day run with the CosMO
-panels. The compressed files `rawDP_<date>.dat.zip` contain the 
+panels. The compressed file `rawDP_<date>.dat.zip` contains the 
 raw wave forms of identified double-pulses in `yaml`-format. The
 script `plotDoublePulses.py` can be used to read the unzipped file and to
 produce graphical displays of the waveforms. These pictures are also contained in the compressed file `dpFigs-<date>.zip`. 

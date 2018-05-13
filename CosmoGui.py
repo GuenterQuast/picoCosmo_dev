@@ -136,7 +136,7 @@ class Ui_CosmoWindow(object):
         _translate = QtCore.QCoreApplication.translate
         CosmoWindow.setWindowTitle(_translate("CosmoWindow", "CosmoGui"))
         self.Tab_Control.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>Control Panel</p></body></html>"))
-        self.label_caption.setText(_translate("CosmoWindow", "Kamiokanne & CosMO Detecotrs with PicoScope"))
+        self.label_caption.setText(_translate("CosmoWindow", "Kamiokanne & CosMO Detectors with PicoScope"))
         self.label_DAQconfig.setText(_translate("CosmoWindow", "DAQ config file:"))
         self.label.setText(_translate("CosmoWindow", "Run Tag:"))
         self.lE_RunTag.setText(_translate("CosmoWindow", "CosmoRun"))
