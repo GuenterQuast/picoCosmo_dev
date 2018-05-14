@@ -2,4 +2,4 @@
 
 DeviceFile:     config/SiPMpulse.yaml
 BMfile:         config/BMconfig.yaml
-PFfile:         config/PFconfig.yaml
+PFfile:         config/PFcosmo.yaml
