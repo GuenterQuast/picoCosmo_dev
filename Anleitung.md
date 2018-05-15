@@ -8,7 +8,7 @@
 ## Beschreibung der Software
 
 Das Netzwerk Teilchenwelt, <http://www.Teilchenwelt.de> stellt Experimente zum Nachweis von Myonen aus der kosmischem Strahlung
-zur Verfügung. Dies sind die Szitillationszähler des CosMO-Experiments und der aus einer Kaffeekanne mit aufgesetzter Photoröhre bestehende Wasser-Cerenkov-Zähler "Kamiokanne". Diese Detektoren liefern kurze Signale von ca. 100 ns Dauer und einigen 10 bis 100 mV Pulshöhe, die mit einem Oszillographen sichtbar gemacht werden können.
+zur Verfügung. Dies sind die Szitillationszähler des CosMO-Experiments und der aus einer Kaffeekanne mit aufgesetzter Photoröhre bestehende Wasser-Cherenkov-Zähler "Kamiokanne". Diese Detektoren liefern kurze Signale von ca. 100 ns Dauer und einigen 10 bis 100 mV Pulshöhe, die mit einem Oszillographen sichtbar gemacht werden können.
 
 Moderne USB-Oszilloskope wie das PicoScope der Firma PichoTechnology, siehe <http://www.picotech.com>, erlauben es, die Pulsformen nicht nur
 anzuzeigen, sondern auch in Echtzeit aufzuzeichnen und zu analysieren.
@@ -142,7 +142,7 @@ Die folgenden Beispiele gelten für den Kamiokanne-Detektor:
     BMfile:     config/BMconfig.yaml  # Buffer Manager configuration
     PFfile:     config/PFconfig.yaml  # Pulse Filter Configuration 
 
-Die  Oszilloskop-Konfiguration enthält Informationen zum Typ  
+Die  Oszilloskop-Konfiguration enthält Informationen zum Typ
 des Oszilloskops, den aktiven Kanälen und zum Trigger:
 
     # file PMpulse.yaml
@@ -194,12 +194,10 @@ der Echtzeit-Histogramme für Pulshöhen, Myon-Rate und Lebensdauer:
 
     # pulse parameters
     #         ______
-    #        /      \  
-    #     _ /_ _ _ _ \_ _ _ _ _ _ _   
-    #                 \__________/
-    #      r    on  f f2   off  r2 
-    #                 f2 - r2 for bi-polar only
-
+    #        /      \ 
+    #     _ /_ _ _ _ \_ 
+    #      r    on  f 
+ 
     pulseShape:
     # trigger pulse
      - pheight: -0.045
@@ -236,7 +234,11 @@ drei Cosmo-Panels.
 
 Die gepackte Datei `rawDP_<date>.dat.zip` enthält die Rohdaten der
 aufgezeichneten Pulsformen für erkannte Doppelpulse. Das Script
-`plotDoublePulses.py` erlaubt das Einlesen der entpackten Datei und die grafische Darstellung der Pulse. Die Bilder sind in der gepackten Datei `dpFigs-<date>.zip` enthalten. Die aus den Doppelpulsen
-bestimmten Lebensdauern sind in der Datei dpKanne2_180403.dat
-enthalten. Eine Anpassung einer Exponentialfunktion an gemessene Lebensdauern zwischen 1.5 µs and 15. µs kann mit dem Skript `fit_dpData.py` ausgeführt werden; das Ergebnis zeigt die Grafikdatei `life-ofMU_180403.png`. 
+`plotDoublePulses.py` erlaubt das Einlesen der entpackten Datei und
+die grafische Darstellung der Pulse. Die Bilder sind in der gepackten
+Datei `dpFigs-<date>.zip` enthalten. Die aus den Doppelpulsen bestimmten
+Lebensdauern sind in der Datei dpKanne2_180403.dat enthalten. Eine
+Anpassung einer Exponentialfunktion an gemessene Lebensdauern zwischen
+1.5 µs and 15. µs kann mit dem Skript `fit_dpData.py` ausgeführt
+werden; das Ergebnis zeigt die Grafikdatei `life-ofMU_180403.png`. 
 
