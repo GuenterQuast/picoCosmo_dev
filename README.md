@@ -215,5 +215,5 @@ produce graphical displays of the waveforms. These pictures are also contained i
 The parameters of events containing double-pulses are stored in file
 dpKanne2_180403.dat. An unbinned log-likelihood fit of measured
 lifetimes between 1.5 µs and 15. µs with the script `fit_dpData.py`
-yields the result shown in figure `life-ofMU_180403.png`.    
+yields the result shown in figure `life-ofMU_<date>.png`.    
 
