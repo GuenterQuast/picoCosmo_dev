@@ -42,7 +42,7 @@
      <string/>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Tab_Control">
      <property name="toolTip">
@@ -58,7 +58,7 @@
       <property name="geometry">
        <rect>
         <x>168</x>
-        <y>70</y>
+        <y>80</y>
         <width>280</width>
         <height>251</height>
        </rect>
@@ -80,7 +80,7 @@
       <property name="geometry">
        <rect>
         <x>160</x>
-        <y>50</y>
+        <y>60</y>
         <width>301</width>
         <height>18</height>
        </rect>
@@ -98,8 +98,17 @@
         <height>30</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Latin Modern Sans</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>DAQ config file:</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::PlainText</enum>
       </property>
      </widget>
      <widget class="QLineEdit" name="lE_DAQConfFile">
@@ -110,6 +119,9 @@
         <width>331</width>
         <height>32</height>
        </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;DAQ configuration file (type .daq)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="text">
        <string notr="true"/>
@@ -124,14 +136,23 @@
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>50</x>
+        <x>40</x>
         <y>410</y>
-        <width>51</width>
+        <width>61</width>
         <height>30</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Latin Modern Sans</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Run Tag:</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::PlainText</enum>
       </property>
      </widget>
      <widget class="QLineEdit" name="lE_RunTag">
@@ -143,6 +164,9 @@
         <height>31</height>
        </rect>
       </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Name for the run&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
       <property name="text">
        <string>CosmoRun</string>
       </property>
@@ -150,7 +174,7 @@
      <widget class="QPushButton" name="pB_StartRun">
       <property name="geometry">
        <rect>
-        <x>400</x>
+        <x>410</x>
         <y>450</y>
         <width>101</width>
         <height>40</height>
@@ -161,6 +185,10 @@
       </property>
       <property name="text">
        <string>StartRun</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>images/start.jpg</normaloff>images/start.jpg</iconset>
       </property>
      </widget>
      <widget class="QLabel" name="label_MainPanel">
@@ -194,8 +222,31 @@
         <height>34</height>
        </rect>
       </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;select DAQ configuration file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
       <property name="text">
        <string>select</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pB_abort">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>0</y>
+        <width>80</width>
+        <height>34</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Exit CosmoGui&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Abort</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>images/abort.jpg</normaloff>images/abort.jpg</iconset>
       </property>
      </widget>
     </widget>
