@@ -5,21 +5,16 @@
 
 The software is tailored to identify short pulses from muon detectors (the 
 scintillator panels of the *CosMO*-experiment by "Netzwerk Teilchenwelt",
-<http://www.teilchenwelt.de>, or the *Kamiokanne*-Experiment with
-photomultiplier readout ( in the examples shown below the pulses were
-shaped to a length of approx. 150 ns). 
+<http://www.teilchenwelt.de>, or the *Kamiokanne*-Experiment (a
+water-cherenkov detector with photomultiplier readout). 
 
-In a first step, the trigger is validated by cross-correlation with a 
-signal template located around the trigger time. Coincidences near a
-validated triggering pulse are searched for in all connected channels. 
-The third step performs a search for additional pulses after the
-triggering event, indicating the decay of a stopped muon in or near the
-detector. This simple set-up allows to measure the mean muon lifetime
-in the muon rest frame (2.2 µs). 
 
-Real-time displays of waveforms and rates are provided. In addition, raw
-waveforms or pictures in `.png`-format of identified double pulses can
-optionally  be stored for off-line analysis or for an instructive analysis "by Hand" based on the waveform pictures.
+Data is read from the PicoScope device via a Buffer Manager, which collects recorded waveforms and distributes them to consumer processes. The consumers either provide real-time displays of a sub-set of the data or perform data analysis.
+ 
+The analysis proceeds in three steps. First, the trigger is validated by cross-correlation with a signal template located around the trigger time. Next, coincidences near a validated triggering pulse are searched for in all connected channels. The optional third step performs a search for additional pulses after the triggering event, indicating the decay of a stopped muon in or near the detector.
+
+The software provides real-time displays of waveforms, detector signals and rates. Optionally, parameters of identified pulses or of double-pulses are written to files in CSV format. In addition, raw waveforms or pictures in .png format of identified double pulses can optionally be stored for off-line analysis or for an instructive analysis "by hand" based on the waveform pictures. From this information, the mean muon lifetime in the muon rest frame (2.2 µs) can be derived. 
+
 
 ## Dependence on other packages
 
@@ -111,7 +106,7 @@ The  `.yaml` files specify configurations for the oscilloscope, the BufferManage
     PFfile:     config/PFconfig.yaml  # Pulse Filter Configuration 
 
 The oscilloscope configuration specifies the oscilloscope model,
- the active channels and the trigger conditions:
+the active channels and the trigger conditions:
 
     # file PMpulse.yaml
     # -----------------
@@ -134,8 +129,8 @@ The oscilloscope configuration specifies the oscilloscope model,
     ChanColors: [darkblue, sienna, indigo]
 
 
-The configuration for the Buffer manager allows to specify the   
-display modules for raw data or logging levels:  
+The configuration for the Buffer manager allows to specify the
+display modules for raw data or logging levels:
 
     # file BMconfig.yaml
     # ------------------

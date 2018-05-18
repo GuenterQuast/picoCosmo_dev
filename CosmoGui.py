@@ -37,14 +37,17 @@ class Ui_CosmoWindow(object):
         self.Tab_Control.setWhatsThis("")
         self.Tab_Control.setObjectName("Tab_Control")
         self.label_Picture = QtWidgets.QLabel(self.Tab_Control)
-        self.label_Picture.setGeometry(QtCore.QRect(168, 80, 280, 251))
+        self.label_Picture.setGeometry(QtCore.QRect(130, 80, 280, 251))
         self.label_Picture.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.label_Picture.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.label_Picture.setText("")
         self.label_Picture.setPixmap(QtGui.QPixmap("images/picoCosmo_iconic.jpg"))
         self.label_Picture.setObjectName("label_Picture")
         self.label_caption = QtWidgets.QLabel(self.Tab_Control)
-        self.label_caption.setGeometry(QtCore.QRect(160, 60, 301, 18))
+        self.label_caption.setGeometry(QtCore.QRect(90, 60, 371, 20))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_caption.setFont(font)
         self.label_caption.setObjectName("label_caption")
         self.label_DAQconfig = QtWidgets.QLabel(self.Tab_Control)
         self.label_DAQconfig.setGeometry(QtCore.QRect(10, 360, 101, 30))
@@ -55,7 +58,7 @@ class Ui_CosmoWindow(object):
         self.label_DAQconfig.setTextFormat(QtCore.Qt.PlainText)
         self.label_DAQconfig.setObjectName("label_DAQconfig")
         self.lE_DAQConfFile = QtWidgets.QLineEdit(self.Tab_Control)
-        self.lE_DAQConfFile.setGeometry(QtCore.QRect(110, 360, 331, 32))
+        self.lE_DAQConfFile.setGeometry(QtCore.QRect(110, 360, 330, 32))
         self.lE_DAQConfFile.setText("")
         self.lE_DAQConfFile.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.lE_DAQConfFile.setReadOnly(True)
@@ -72,10 +75,10 @@ class Ui_CosmoWindow(object):
         self.lE_RunTag.setGeometry(QtCore.QRect(110, 410, 113, 31))
         self.lE_RunTag.setObjectName("lE_RunTag")
         self.pB_StartRun = QtWidgets.QPushButton(self.Tab_Control)
-        self.pB_StartRun.setGeometry(QtCore.QRect(410, 450, 101, 40))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("images/start.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pB_StartRun.setGeometry(QtCore.QRect(411, 461, 101, 40))
+        icon = QtGui.QIcon.fromTheme("media-playback-start")
         self.pB_StartRun.setIcon(icon)
+        self.pB_StartRun.setIconSize(QtCore.QSize(24, 24))
         self.pB_StartRun.setObjectName("pB_StartRun")
         self.label_MainPanel = QtWidgets.QLabel(self.Tab_Control)
         self.label_MainPanel.setGeometry(QtCore.QRect(0, 0, 151, 41))
@@ -84,13 +87,17 @@ class Ui_CosmoWindow(object):
         self.label_MainPanel.setLineWidth(3)
         self.label_MainPanel.setObjectName("label_MainPanel")
         self.pB_FileSelect = QtWidgets.QPushButton(self.Tab_Control)
-        self.pB_FileSelect.setGeometry(QtCore.QRect(444, 360, 61, 34))
+        self.pB_FileSelect.setGeometry(QtCore.QRect(440, 359, 71, 34))
+        icon = QtGui.QIcon.fromTheme("document")
+        self.pB_FileSelect.setIcon(icon)
         self.pB_FileSelect.setObjectName("pB_FileSelect")
         self.pB_abort = QtWidgets.QPushButton(self.Tab_Control)
-        self.pB_abort.setGeometry(QtCore.QRect(430, 0, 80, 34))
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("images/abort.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pB_abort.setIcon(icon1)
+        self.pB_abort.setGeometry(QtCore.QRect(432, 0, 80, 41))
+        self.pB_abort.setAccessibleDescription("")
+        icon = QtGui.QIcon.fromTheme("application-exit")
+        self.pB_abort.setIcon(icon)
+        self.pB_abort.setIconSize(QtCore.QSize(20, 20))
+        self.pB_abort.setAutoDefault(False)
         self.pB_abort.setObjectName("pB_abort")
         self.tab_Main.addTab(self.Tab_Control, "")
         self.Tab_Config = QtWidgets.QWidget()
@@ -145,11 +152,20 @@ class Ui_CosmoWindow(object):
         self.label_ConfigPanel.setTextFormat(QtCore.Qt.PlainText)
         self.label_ConfigPanel.setObjectName("label_ConfigPanel")
         self.tab_Main.addTab(self.Tab_Config, "")
+        self.Tab_Help = QtWidgets.QWidget()
+        self.Tab_Help.setObjectName("Tab_Help")
+        self.TE_Help = QtWidgets.QTextEdit(self.Tab_Help)
+        self.TE_Help.setGeometry(QtCore.QRect(0, 0, 511, 501))
+        self.TE_Help.setUndoRedoEnabled(False)
+        self.TE_Help.setReadOnly(True)
+        self.TE_Help.setPlaceholderText("")
+        self.TE_Help.setObjectName("TE_Help")
+        self.tab_Main.addTab(self.Tab_Help, "")
         CosmoWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(CosmoWindow)
-        self.tab_Main.setCurrentIndex(1)
-        self.tabWidget.setCurrentIndex(2)
+        self.tab_Main.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(CosmoWindow)
 
     def retranslateUi(self, CosmoWindow):
@@ -181,11 +197,16 @@ class Ui_CosmoWindow(object):
         self.rB_EditMode.setText(_translate("CosmoWindow", "Edit Mode"))
         self.label_ConfigPanel.setText(_translate("CosmoWindow", "   Configuration Panel"))
         self.tab_Main.setTabText(self.tab_Main.indexOf(self.Tab_Config), _translate("CosmoWindow", "Configuration"))
+        self.Tab_Help.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>Info &amp; Help</p></body></html>"))
+        self.tab_Main.setTabText(self.tab_Main.indexOf(self.Tab_Help), _translate("CosmoWindow", "Help"))
 
 
 # --> code not generated by designer-qt5 and pyuic5 starts here --> 
 
         self.Window = CosmoWindow
+
+# set help 
+        self.TE_Help.setText(open('doc/help.html', 'r').read() )
 
 # set font for plainTextEdit to monospace
         monofont = QtGui.QFont()
@@ -328,4 +349,5 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - -
 
   MainWindow.show()
   sys.exit(app.exec_())
+
 
