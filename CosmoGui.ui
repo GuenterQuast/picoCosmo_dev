@@ -36,7 +36,7 @@
      </rect>
     </property>
     <property name="toolTip">
-     <string/>
+     <string>Help / Hilfe</string>
     </property>
     <property name="statusTip">
      <string/>
@@ -437,7 +437,7 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Info &amp;amp; Help&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <attribute name="title">
-      <string>Help</string>
+      <string>Help / Hilfe</string>
      </attribute>
      <widget class="QTextEdit" name="TE_Help">
       <property name="geometry">

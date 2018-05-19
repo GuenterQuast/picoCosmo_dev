@@ -4,24 +4,24 @@
 Diese Software dient zur Aufzeichnung und Analyse kurzer Pulse, die in Detektoren zum Nachweis von Myonen aus der Kosmischen Strahlung entstehen, z.B. den Szintillatorplatten des CosMO-Experimtens des Netzwerks Teilchenwelt, <http://www.Teilchenwelt.de>, oder im Kamiokanne-Experiment (ein Wasser-Cherenkov-Detektor mit
 Auslese durch eine Photoröhre).
 
-Die Daten werden mit einm modernen USB-Oszilloskop
+Die Daten werden mit einem modernen USB-Oszilloskop
 (PicoScope der Firma PichoTechnology) aufgenommen.
-Ein Puffer-Manager sammelt und verteilt die aufgezeichneten Pulsformen
-an Consumer-Prozesse, die sie in Echtzeit anzeigen oder die Daten analysieren.
+Ein Puffer-Manager sammelt und verteilt die aufgezeichneten Pulsformen an Consumer-Prozesse, die
+sie in Echtzeit anzeigen oder die Daten analysieren.
 
 Die Analyse der aufgezeichneten Pulsformen verläuft in drei Schritten:
 
 1. #### Validierung der Trigger-Schwelle des Oszilloskops
    Dazu wird der Signalverlauf um den Triggerzeitpunkt mit einem
    Musterpuls verglichen und das Signal akzeptiert, wenn die Form gut  
-   übereinstimmt und eine Mindest-Pulshöhe überschritten wird.
+   übereinstimmt und eine Mindestpulshöhe überschritten wird.
 
 2. #### Suche nach Koinzidenzen
    Als nächstes werden Pulse auf allen aktiven Kanälen in der Nähe
    des Triggerzeitpunkts gesucht. Bei mehr als einem
-   angeschlossenen Detektor wird ein aufgezeichnetes Ereignis
-   akzeptiert, wenn mindestens zwei in zeitlicher Koinzidenz
-   auftreten. 
+   angeschlossenen Detektor wird ein aufgezeichnetes
+   Ereignis akzeptiert, wenn mindestens zwei in
+   zeitlicher Koinzidenz auftreten. 
 
 3. #### Suche nach verzögerten Pulsen
    Im optionalen dritten Schritt werden weitere Pulse auf allen
@@ -35,11 +35,10 @@ Die Analyse der aufgezeichneten Pulsformen verläuft in drei Schritten:
    bestimmt werden kann.
 
 Die Software bietet Echtzeit-Anzeigen der Myon-Rate und
-der Detektorsignale sowie Histogramme der aufgenommenen
-Pulshöhen und der Myon-Lebensdauern. Zusätzlich können
-Mehrfach-Pulse als Rohdaten der registrierten Pulsformen
-oder als Bilder im `.png`-Format gespeichert werden. 
-
+der Detektorsignale sowie von Histogrammen der Pulshöhen
+und der Myon-Lebensdauern. Zusätzlich können Mehrfach-Pulse
+als Rohdaten der registrierten Pulsformen oder
+als Bilder im `.png`-Format gespeichert werden.
 
 
 ## Konfiguration und Programmausführung
@@ -48,11 +47,11 @@ Die Datanaufnahme und Analyse wird über die grafische Oberfläche
 (`./CosmoGui.py xxx.daq`) oder über die Kommandozeile     
 (`./runCosmo xxxx.daq`) gestartet.
 
-Die benötigten Information zur Konfiguration des USB-Oszilloskops, der
-Pufferverwaltung und für die Pulsanalyse werden in Konfigurationsdateien
-im `.yaml`-Format bereit gestellt. Die für eine spezielle Konfiguration
-verwendeten Dateien sind in einer Datei im `.yaml`-Format mit der Endung
-`.daq` enthalten. Das folgende Beispiel gilt für den Kamiokanne-Detektor:
+Die benötigten Information zur Konfiguration des USB-Oszilloskops,
+der Pufferverwaltung und für die Pulsanalyse werden in 
+Konfigurationsdateien im `.yaml`-Format bereit gestellt.
+Die für eine spezielle Konfiguration verwendeten Dateien sind in einer Datei im `.yaml`-Format mit der Endung `.daq` enthalten.
+Das folgende Beispiel gilt für den Kamiokanne-Detektor:
 
     # file Kanne.daq
     # --------------------
