@@ -2,9 +2,9 @@
 
 PSmodel: 2000a      # model type (2000a is default)
 
-picoChannels: [A, B, C]
+picoChannels: [A, B]
+## picoChannels: [A, B, C] #for 4-channel scope
 ChanModes:     [AC, AC, AC]
-##picoChannels: [A, B]
 ChanRanges: [0.2, 0.2, 0.2]
 ChanOffsets: [0.14, 0.16, 0.15]
 ChanColors: [darkblue, sienna, indigo]
