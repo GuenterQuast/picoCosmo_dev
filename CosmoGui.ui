@@ -443,9 +443,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
+        <y>30</y>
         <width>511</width>
-        <height>501</height>
+        <height>471</height>
        </rect>
       </property>
       <property name="undoRedoEnabled">
@@ -456,6 +456,40 @@
       </property>
       <property name="placeholderText">
        <string notr="true"/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="PB_Help">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>88</width>
+        <height>34</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>English</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>images/flagUK.png</normaloff>images/flagUK.png</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="PB_Hilfe">
+      <property name="geometry">
+       <rect>
+        <x>423</x>
+        <y>0</y>
+        <width>88</width>
+        <height>34</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Deutsch</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>images/flagDE.png</normaloff>images/flagDE.png</iconset>
       </property>
      </widget>
     </widget>
