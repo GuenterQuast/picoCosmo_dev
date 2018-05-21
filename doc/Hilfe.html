@@ -8,7 +8,7 @@
 <body>
 <h1>Beschreibung picoCosmo</h1>
 <p>Diese Software dient zur Aufzeichnung und Analyse kurzer Pulse, die in Detektoren zum Nachweis von Myonen aus der Kosmischen Strahlung entstehen, z.B. den Szintillatorplatten des CosMO-Experimtens des Netzwerks Teilchenwelt, <a href="http://www.Teilchenwelt.de">http://www.Teilchenwelt.de</a>, oder im Kamiokanne-Experiment (ein Wasser-Cherenkov-Detektor mit
-Auslese durch eine Photoröhre).</p>
+Auslese mittels einer Photoröhre).</p>
 <p>Die Daten werden mit einem modernen USB-Oszilloskop
 (PicoScope der Firma PichoTechnology) aufgenommen.
 Ein Puffer-Manager sammelt und verteilt die aufgezeichneten Pulsformen an Consumer-Prozesse, die
@@ -56,17 +56,16 @@ der Pufferverwaltung und für die Pulsanalyse werden in
 Konfigurationsdateien im <code>.yaml</code>-Format bereit gestellt.
 Die für eine spezielle Konfiguration verwendeten Dateien sind in einer Datei im <code>.yaml</code>-Format mit der Endung <code>.daq</code> enthalten.
 Das folgende Beispiel gilt für den Kamiokanne-Detektor:</p>
-<pre><code># file Kanne.daq
-# --------------------
-# configuration files for Kamiokanne
+<pre><code># file Kanne.daq ----------------------
+#   configuration files for Kamiokanne
 
-DeviceFile: config/PMpulse.yaml   # Oscilloscope configuration
-BMfile:     config/BMconfig.yaml  # Buffer Manager configuration
-PFfile:     config/PFconfig.yaml  # Pulse Filter Configuration
+DeviceFile: config/PMpulse.yaml  # Oscilloscope configuration
+BMfile:     config/BMconfig.yaml # Buffer Manager config.
+PFfile:     config/PFconfig.yaml # Pulse Filter config.
 </code></pre>
-<p>Die Konfigurationsdateien werden in die grafische Oberfläche geladen
-und können dort editiert werden.</p>
-<p>Über die grafische Oberfläche kann ein Name für die Datennahme
+<p>Die Konfigurationsdateien werden in die grafische Oberfläche
+geladen und können dort editiert werden.
+Über die grafische Oberfläche kann ein Name für die Datennahme
 festgelegt werden. Alle für eine Datennahme (einen sogenannten
 <code>Run</code>) benötigten Konfigurationsdateien und die Programmausgaben
 werden in einem eigenen Verzeichnis abgelegt, deren Name aus dem

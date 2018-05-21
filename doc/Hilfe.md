@@ -2,7 +2,7 @@
 
 
 Diese Software dient zur Aufzeichnung und Analyse kurzer Pulse, die in Detektoren zum Nachweis von Myonen aus der Kosmischen Strahlung entstehen, z.B. den Szintillatorplatten des CosMO-Experimtens des Netzwerks Teilchenwelt, <http://www.Teilchenwelt.de>, oder im Kamiokanne-Experiment (ein Wasser-Cherenkov-Detektor mit
-Auslese durch eine Photoröhre).
+Auslese mittels einer Photoröhre).
 
 Die Daten werden mit einem modernen USB-Oszilloskop
 (PicoScope der Firma PichoTechnology) aufgenommen.
@@ -53,18 +53,15 @@ Konfigurationsdateien im `.yaml`-Format bereit gestellt.
 Die für eine spezielle Konfiguration verwendeten Dateien sind in einer Datei im `.yaml`-Format mit der Endung `.daq` enthalten.
 Das folgende Beispiel gilt für den Kamiokanne-Detektor:
 
-    # file Kanne.daq
-    # --------------------
-    # configuration files for Kamiokanne 
+    # file Kanne.daq ----------------------
+    #   configuration files for Kamiokanne
 
-    DeviceFile: config/PMpulse.yaml   # Oscilloscope configuration
-    BMfile:     config/BMconfig.yaml  # Buffer Manager configuration
-    PFfile:     config/PFconfig.yaml  # Pulse Filter Configuration
+    DeviceFile: config/PMpulse.yaml  # Oscilloscope configuration
+    BMfile:     config/BMconfig.yaml # Buffer Manager config.
+    PFfile:     config/PFconfig.yaml # Pulse Filter config.
 
-
-Die Konfigurationsdateien werden in die grafische Oberfläche geladen
-und können dort editiert werden.
-
+Die Konfigurationsdateien werden in die grafische Oberfläche
+geladen und können dort editiert werden.
 Über die grafische Oberfläche kann ein Name für die Datennahme
 festgelegt werden. Alle für eine Datennahme (einen sogenannten
 `Run`) benötigten Konfigurationsdateien und die Programmausgaben
