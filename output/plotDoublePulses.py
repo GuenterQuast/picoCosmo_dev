@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 # script plotDoublePulses.py
 
+'''visual display of raw wave forms saved by picoCosmo.py
+'''
 
 from __future__ import print_function, division, unicode_literals
 from __future__ import absolute_import
@@ -15,15 +17,20 @@ import matplotlib.pyplot as plt, matplotlib.animation as anim
 # animated displays running as background processes/threads
 from picodaqa.Oscilloscope import *
 
-def yieldEvt():
-  cnt = 0
-  for d in data:
-    evt = (3, cnt, time.time(), d)
-    yield evt
-    cnt += 1
-    print("event %i"%(cnt))
-    time.sleep(twait)
-  return
+def readblock():
+# read data sequentially from input file
+#   end of block marked by ']]\n'
+  global f
+  txt = ''
+  while True:
+    l = f.readline()
+    if (not l):  # end of file 
+      # print('   end of file')
+      return ''
+    txt += l
+    if l[-3:-1] == ']]':
+      # print('   end of block')
+      return txt 
 
 if __name__ == "__main__": # -----------------------------
 
@@ -33,45 +40,48 @@ if __name__ == "__main__": # -----------------------------
   else: 
     fnam = 'rawDPtest.dat'
   print('    input from file ' + fnam)
+
   try:
-    with open(fnam) as f:
-      print("*= loading data")
-      obj = yaml.load(f)
+    f = open(fnam, 'r')
   except:
-    print('     failed to read input file ' + fnam)
+    print('     failed to open input file ' + fnam)
     exit(1)
 
-  data = obj['data']
-  Ndat = len(data)
-  print("*= %i data sets found"%(Ndat) )
-  
-  plt.ion()  
+  # read first block from file
+  try:
+    txt = readblock()   
+    obj = yaml.load(txt)
+    conf = obj['OscConf']
+  except:
+    print('     failed read oscillocope configuration ')
+    exit(1)
+
   print("*= start animation")
-  conf = obj['OscConf']
+  plt.ion()  
+  # initialize oscilloscope display
   Osci = Oscilloscope(conf, 'DoublePulse') 
   figOs = Osci.fig
-  twait = 0.5  # time between figure updates in s
-
-# set up matplotlib animation ...
-#  osciAnim = anim.FuncAnimation(figOs, Osci, yieldEvt, 
-#             init_func=Osci.init, interval=20, blit=True,
-#             fargs=None, repeat=False, save_count=None)
-#                 # save_count=None is a (temporary) work-around 
-#                 #     to fix memory leak in animate
-#  plt.show(block=True)
-# ... end matplotlib animation 
-
-# or use hand-written loop:
   Osci.init()
+  twait = 0.3  # time between figure updates in s
   cnt = 0 
-  for d in data:
-    cnt += 1
-    evt = (3, cnt, time.time(), d)
-    print("event %i"%(cnt))
-    Osci(evt)
-    figOs.canvas.draw()
+  
+  while True:
+    data = obj['data']
+    for d in data:
+      cnt += 1
+      evt = (3, cnt, time.time(), d)
+      print("event %i"%(cnt))
+      Osci(evt)
+      figOs.canvas.draw()
 ##    figOs.savefig('DPfig%03i'%(cnt)+'.png')
-    time.sleep(twait)
+      time.sleep(twait)
 
+    # read next block
+    txt = readblock()
+    if txt == '':
+      break # end of file
+    obj = yaml.load('data: \n' + txt)
+    data = obj['data']
 
+  f.close()
   print("*= end")
