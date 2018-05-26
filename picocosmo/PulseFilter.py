@@ -199,10 +199,19 @@ class PulseFilter(object):
       self.pheight[i] = refPulseDicts[i]['pheight'] 
 
     if self.verbose:
-      print('      PF: pulse parameters set')
-      for i in range(Npulses):
-        print('       taur: %.3g, tauon: %.3g, tauf: %.3g, height: %.3g'\
-         %(self.taur[i], self.tauon[i], self.tauf[i], self.pheight[i]) )
+      print('*==*  Pulse Filter: pulse parameters set:')
+      for iC in range(self.NChan):
+        idP = min(iC, self.NChan - 1) # Channel Pulse Shape 
+        print(8*' '+\
+            '%s: τ_r: %.3gs, τ_on: %.3gs, τ_f: %.3gs, height: %.3gV'\
+          %(self.ChanNames[iC],
+            self.taur[idP], self.tauon[idP], self.tauf[idP], self.pheight[idP]) )
+      if self.useTrgShape:
+        print(6*' '+'Trigger pulse shape:')
+        print(8*' '\
+                   +'%s: τ_r: %.3gs, τ_on: %.3gs, τ_f: %.3gs, height: %.3gV'\
+           %(self.trgChan, 
+             self.taur[-1], self.tauon[-1], self.tauf[-1], self.pheight[-1]) )
 
 # calculate thresholds for correlation analysis
     # norm of reference pulse    
@@ -234,6 +243,14 @@ class PulseFilter(object):
   # read configuration dictionary
     try: 
       refPulseDicts=self.confDict['pulseShape']    
+      self.NShapes = len(refPulseDicts)
+
+      if 'trgPulseShape' in self.confDict:
+        trgPulseDict=self.confDict['trgPulseShape'][0]    
+        refPulseDicts.append(trgPulseDict)
+        self.useTrgShape = True
+      else:
+        self.useTrgShape = False
 
       if "logFile" in self.confDict:
         logFile = self.confDict['logFile']
@@ -323,11 +340,12 @@ class PulseFilter(object):
     self.dTprec = self.idTprec * self.dT  
     self.NChan = self.BM.NChannels
     self.NSamples = self.BM.NSamples
+    self.ChanNames = self.BM.DevConf.picoChannels   
     self.trgChan = self.BM.DevConf.trgChan     # trigger Channel
     # index of trigger T0
     self.idT0 = int(self.BM.DevConf.NSamples * self.BM.DevConf.pretrig) 
     self.iCtrg = -1
-    for i, C in enumerate(self.BM.DevConf.picoChannels):   
+    for i, C in enumerate(self.ChanNames):   
       if C == self.trgChan: 
         self.iCtrg = i       # number of trigger Channel
         break
@@ -400,21 +418,27 @@ class PulseFilter(object):
 
 # 1. validate trigger pulse
       if iCtrg >= 0:  
-        offset = max(0, idT0 - int(taur[0]/dT) - idTprec)
-        cort = np.correlate(evData[iCtrg, offset:idT0+idTprec+lref[0]], 
-             refP[0], mode='valid')
+        if(self.useTrgShape): # use trgger pulse shape if given ...
+          idP = -1  
+        else: # ... or Channel Pulse Shape otherwise
+          idP = min(iCtrg, self.NShapes - 1 ) 
+
+        offset = max(0, idT0 - int(taur[idP]/dT) - idTprec)
+        cort = np.correlate(evData[iCtrg, offset:idT0+idTprec+lref[idP]], 
+                            refP[idP], mode='valid')
         # set all values below threshold to threshold
-        cort[cort<pthr[0]] = pthr[0] 
+        cort[cort<pthr[idP]] = pthr[idP] 
         idtr = np.argmax(cort) + offset # index of 1st maximum 
-        if idtr > idT0 + (taur[0] + tauon[0])/dT + idTprec:
+        if idtr > idT0 + (taur[idP] + tauon[idP])/dT + idTprec:
           if self.histQ: hnTrSigs.append(0.)
           continue #- while # no pulse near trigger, skip rest of event analysis
-    # pulse candidate in right time window found ...
+ 
+   # pulse candidate in right time window found ...
     # ... check pulse shape by requesting match with time-averaged pulse
-        evdt = evData[iCtrg, idtr:idtr+lref[0]]
+        evdt = evData[iCtrg, idtr:idtr+lref[idP]]
         evdtm = evdt - evdt.mean()  # center signal candidate around zero
-        cc = np.sum(evdtm * refPm[0]) # convolute mean-corrected reference
-        if cc > pthrm[0]:
+        cc = np.sum(evdtm * refPm[idP]) # convolute mean-corrected reference
+        if cc > pthrm[idP]:
           validated = True # valid trigger pulse found, store
           Nval +=1
           V = max(abs(evdt)) # signal Voltage  
@@ -431,19 +455,20 @@ class PulseFilter(object):
 # 2. find coincidences
       Ncoinc = 1
       for iC in range(NChan):
+        idP = min(iC, self.NShapes - 1) # Channel Pulse Shape 
         if iC != iCtrg:
           offset = max(0, idtr - idTprec)  # search around trigger pulse
     #  analyse channel to find pulse near trigger
-          cor = np.correlate(evData[iC, offset:idT0+idTprec+lref[-1]], 
-          refP[-1], mode='valid')
-          cor[cor<pthr[-1]] = pthr[-1] # set all values below threshold to threshold
+          cor = np.correlate(evData[iC, offset:idT0+idTprec+lref[idP]], 
+                 refP[idP], mode='valid')
+          cor[cor<pthr[idP]] = pthr[idP] # set all values below threshold to threshold
           id = np.argmax(cor)+offset # find index of (1st) maximum 
-          if id > idT0 + (taur[-1] + tauon[-1])/dT + idTprec:
+          if id > idT0 + (taur[idP] + tauon[idP])/dT + idTprec:
             continue # no pulse near trigger, skip
-          evd = evData[iC, id:id+lref[-1]]
-          evdm = evd - evd.mean()  # center signal candidate around zero
-          cc = np.sum(evdm * refPm[-1]) # convolute mean-corrected reference
-          if cc > pthrm[-1]:
+          evd = evData[iC, id:id+lref[idP]]
+          evdm = evd - evd.mean()   # center signal candidate around zero
+          cc = np.sum(evdm * refPm[idP]) # convolute mean-corrected reference
+          if cc > pthrm[idP]:
             NSig[iC] +=1
             Ncoinc += 1 # valid, coincident pulse
             V = max(abs(evd))
@@ -470,18 +495,18 @@ class PulseFilter(object):
 # search for double-pulses ?
       if self.DPanalysis:
 #3. find subsequent pulses in accepted events
-        offset = idtr + lref[-1] # search after trigger pulse
+        offset = idtr + lref[idP] # search after trigger pulse
         for iC in range(NChan):
-          cor = np.correlate(evData[iC, offset:], refP[-1], mode='valid')
-          cor[cor<pthr[-1]] = pthr[-1] # set values below threshold to threshold
+          cor = np.correlate(evData[iC, offset:], refP[idP], mode='valid')
+          cor[cor<pthr[idP]] = pthr[idP] # set values below threshold to threshold
           idmx, = argrelmax(cor)+offset # find index of maxima in evData array
 # clean-up pulse candidates by requesting match with time-averaged pulse
           iacc = 0
           for id in idmx:
-            evd = evData[iC, id:id+lref[-1]]
+            evd = evData[iC, id:id+lref[idP]]
             evdm = evd - evd.mean()  # center signal candidate around zero
-            cc = np.sum(evdm * refPm[-1]) # convolute mean-corrected reference
-            if cc > pthrm[-1]: # valid pulse 
+            cc = np.sum(evdm * refPm[idP]) # convolute mean-corrected reference
+            if cc > pthrm[idP]: # valid pulse 
               iacc+=1
               NSig[iC] += 1
               V = max(abs(evd)) # signal Voltage 

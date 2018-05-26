@@ -1,4 +1,4 @@
-# Configuration file for PulseFilter
+# Configuration file for PulseFilter with Kamiokanne
 
 # output files 
 #logFile: Null   # store all pulses, Null to disable
@@ -15,15 +15,18 @@ pictFile: dpFigs # save pictures of double-pulses
 #      r   on  f 
 #                 
 
+# pulse shape(s) for channels
+#    if only one given, it is used for all channels
 pulseShape:
-# trigger pulse
- - pheight: -0.045
+ - pheight: -0.035
    taur   : 20.E-9
    tauon  : 12.E-9 
    tauf   : 128.E-9 
 
-# other pulses
- - pheight: -0.035
+# pulse shape for trigger signal
+#   optional - if not given, uses pulseShape
+trgPulseShape:
+ - pheight: -0.045
    taur   : 20.E-9
    tauon  : 12.E-9 
    tauf   : 128.E-9 

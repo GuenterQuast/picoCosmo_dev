@@ -7,8 +7,11 @@
 
 ## Beschreibung der Software
 
-Das Netzwerk Teilchenwelt, <http://www.Teilchenwelt.de> stellt Experimente zum Nachweis von Myonen aus der kosmischem Strahlung
-zur Verfügung. Dies sind die Szitillationszähler des CosMO-Experiments und der aus einer Kaffeekanne mit aufgesetzter Photoröhre bestehende Wasser-Cherenkov-Zähler "Kamiokanne". Diese Detektoren liefern kurze Signale von ca. 100 ns Dauer und einigen 10 bis 100 mV Pulshöhe, die mit einem Oszillographen sichtbar gemacht werden können.
+Das Netzwerk Teilchenwelt, <http://www.Teilchenwelt.de> stellt Experimente
+zum Nachweis von Myonen aus der kosmischem Strahlung zur Verfügung.
+Dies sind die Szitillationszähler des CosMO-Experiments und der aus einer Kaffeekanne mit aufgesetzter Photoröhre bestehende Wasser-Cherenkov-Zähler "Kamiokanne". Diese Detektoren liefern kurze Signale von ca. 100 ns Dauer
+und einigen 10 bis 100 mV Pulshöhe, die mit einem Oszillographen sichtbar
+gemacht werden können.
 
 Moderne USB-Oszilloskope wie das PicoScope der Firma PichoTechnology, siehe <http://www.picotech.com>, erlauben es, die Pulsformen nicht nur
 anzuzeigen, sondern auch in Echtzeit aufzuzeichnen und zu analysieren.
@@ -18,7 +21,7 @@ Die Analyse der aufgezeichneten Pulsformen verläuft in drei Schritten:
 
 1. #### Validierung der Trigger-Schwelle des Oszilloskops
    Dazu wird der Signalverlauf um den Triggerzeitpunkt mit einem
-   Musterpuls verglichen und das Signal akzeptiert, wenn die Form gut  
+   Musterpuls verglichen und das Signal akzeptiert, wenn die Form gut
    übereinstimmt und eine Mindest-Pulshöhe überschritten wird.
 
 2. #### Suche nach Koinzidenzen
@@ -26,7 +29,7 @@ Die Analyse der aufgezeichneten Pulsformen verläuft in drei Schritten:
    des Triggerzeitpunkts gesucht. Bei mehr als einem
    angeschlossenen Detektor wird ein aufgezeichnetes Ereignis
    akzeptiert, wenn mindestens zwei in zeitlicher Koinzidenz
-   auftreten. 
+   auftreten.
 
 3. #### Suche nach verzögerten Pulsen
    Im optionalen dritten Schritt werden weitere Pulse auf allen
@@ -35,12 +38,13 @@ Die Analyse der aufgezeichneten Pulsformen verläuft in drei Schritten:
    wenn ein Myon aus der kosmischen Strahlung nach Durchgang
    durch den bzw. die Detektoren gestoppt und das aus dem Zerfall
    entstandene Elektron registriert wird. Die registrierten
-   individuellen Lebensdauern folgen einer Exponential-Verteilung mit  
+   individuellen Lebensdauern folgen einer Exponential-Verteilung mit
    einer mittleren Lebensdauern von 2,2 µs, die auf diese Weise
    bestimmt werden kann.
 
-Die Software bietet Echtzeit-Anzeigen der Myon-Rate, der aufgenommenen Pulshöhen und der Myon-Lebensdauern. Zusätzlich können
-Mehrfach-Pulse als Rohdaten der registrierten Pulsformen oder als Bilder im `.png`-Format gespeichert werden. 
+Die Software bietet Echtzeit-Anzeigen der Myon-Rate, der aufgenommenen Pulshöhen und der Myon-Lebensdauern. Zusätzlich können Mehrfach-Pulse
+als Rohdaten der registrierten Pulsformen oder als Bilder im `.png`-Format
+gespeichert werden.
 
 ###Abhängigkeiten von anderen Paketen
 
@@ -122,15 +126,17 @@ Wie oben beschrieben, wir die Datanaufnahme und Analyse entweder
 Nach dem Start eines Runs startet die grafische Oberfläche des
 Puffer-Managers und die in der Konfiguration festgelegten
 Echtzeit-Anzeigen. Über die Kontrollflächen des Puffer-Managers kann die Datennahme pausiert (`Pause`), wieder aufgenommen (`Resume`) oder beendet werden kann (`Stop` und `EndRun`). In gestopptem Zustand
-werden die Ausgabedateien geschlossen, aber alle Fenster beleiben noch geöffnet, so dass Grafiken betrachtet  oder gespeichert und statistische Information ausgewertet werden können. Wird der Run beendet, verschwinden alle Fenster. 
+werden die Ausgabedateien geschlossen, aber alle Fenster bleiben noch geöffnet, so dass Grafiken betrachtet  oder gespeichert und statistische Information ausgewertet werden können. Wird der Run beendet, verschwinden
+alle Fenster.
 
 Eine Hilfsanwendung,  `plotDoublePulses.py` ermöglicht das Einlesen
 der abgespeicherten Pulsformen und deren Anzeige als Grafiken.
 Code zum Speichern im `.png`-Format ist enthalten, aber auskommentiert.
 
-Die Konfigurationsdateien für das USB-Oszilloskop, den Puffer-Manager und die Signalanalyse werden sind in jeweils einer  Datei vom 
-Typ `.yaml` im Unterverzeichnis `config/` festgelegt. Die Dateinamen
-sind in Dateien vom Typ `.daq` enthalten, also `Kanne.daq` für  Kamiokanne and `Cosmo.daq` für die CosMO-Panels.
+Die Konfigurationsdateien für das USB-Oszilloskop, den Puffer-Manager und die Signalanalyse werden sind in jeweils einer  Datei vom  Typ `.yaml` im
+Unterverzeichnis `config/` festgelegt. Die Dateinamen sind in Dateien vom
+Typ `.daq` enthalten, also `Kanne.daq` für  Kamiokanne and `Cosmo.daq` für
+die CosMO-Panels.
 
 Die folgenden Beispiele gelten für den Kamiokanne-Detektor:
 
@@ -171,16 +177,18 @@ erstellt werden soll:
 
     # file BMconfig.yaml
     # ------------------
-    # configuration of picoDAQ Buffer Manager 
+    # configuration of picoDAQ Buffer Manager
 
     NBuffers: 16         # number of buffers to store raw waveforms
     BMmodules: [mpOsci]  # BufferMan modules to start
     verbose: 1   # set verbosity level
     LogFile: BMsum # write log-file entries with current statistics
 
-Die Konfiguration der Pulsanalyse gibt die Pulsform, die Pulshöhe,
-die zu startenden Anzeige-Module an und enthält die Spezifikation  
-der Echtzeit-Histogramme für Pulshöhen, Myon-Rate und Lebensdauer:
+Die Konfiguration der Pulsanalyse spezifiziert die gewünschten
+Ausgabedateien und gibt  die Pulsform und die Pulshöhe
+für jeden Kanal sowie die zu startenden Anzeige-Module an.
+Sie enthält auch die Spezifikation der Echtzeit-Histogramme für
+Pulshöhen, Myon-Rate und Lebensdauer. Ein Beispiel ist hier gezeigt:
 
     # file PFconfig.yaml
     # -------------------
@@ -197,21 +205,24 @@ der Echtzeit-Histogramme für Pulshöhen, Myon-Rate und Lebensdauer:
     #        /      \ 
     #     _ /_ _ _ _ \_ 
     #      r    on  f 
- 
-    pulseShape:
-    # trigger pulse
-     - pheight: -0.045
-       taur   : 20.E-9
-       tauon  : 12.E-9 
-       tauf   : 128.E-9 
-       mode   : 0             # 0:uni-polar  1: bipolar 
 
-    # other pulses (optional, if not given, use same as for trigger)
+    # pulse shape(s) for channels
+    #         if only one given, it is used for all channels
+    pulseShape:
      - pheight: -0.035
        taur   : 20.E-9
        tauon  : 12.E-9 
        tauf   : 128.E-9 
-   
+
+    # pulse shape for trigger signal
+    #         optional - if not given, uses pulseShape
+    trgPulseShape:
+     - pheight: -0.045
+       taur   : 20.E-9
+       tauon  : 12.E-9 
+       tauf   : 128.E-9 
+
+
     # Display Modules to be started
     modules: [RMeter, Display, Hists]
 
@@ -230,7 +241,7 @@ der Echtzeit-Histogramme für Pulshöhen, Myon-Rate und Lebensdauer:
 
 Das Verzeichnis `./output` enthält Ergebnisse einer Langzeitmessung
 (ca. 20 Tage) mit der Kanne und einer etwa eintägigen Messung mit
-drei Cosmo-Panels. 
+zwei Cosmo-Panels. 
 
 Die gepackte Datei `rawDP_<date>.dat.zip` enthält die Rohdaten der
 aufgezeichneten Pulsformen für erkannte Doppelpulse. Das Script

@@ -130,7 +130,8 @@ the active channels and the trigger conditions:
 
 
 The configuration for the Buffer manager allows to specify the
-display modules for raw data or logging levels:
+number of buffers, the display modules for raw data and the 
+logging level:
 
     # file BMconfig.yaml
     # ------------------
@@ -142,8 +143,11 @@ display modules for raw data or logging levels:
     LogFile: BMsum # write log-file entries with current statistics
 
 The configuration for running with the CosMO detectors or Kamiokanne
-are specified in the PulseFilter configuration file.  An Example is
-shown here: 
+are specified in the PulseFilter configuration file. It contains 
+the specification of desired output files, the pulse shapes and
+pulse heights for every connected channel, the display modules
+to be started and and the definition of real-time histograms for pulse heights, muon rate and muon life-time. An example is shown
+here: 
 
     # file PFconfig.yaml
     # -------------------
@@ -163,28 +167,23 @@ shown here:
     #      r    on  f f2   off  r2 
     #                 f2 - r2 for bi-polar only
 
+    # pulse shape(s) for channels
+    #    if only one given, it is used for all channels
     pulseShape:
-    # trigger pulse
-     - taur   : 20.E-9
+     - pheight: -0.035
+       taur   : 20.E-9
        tauon  : 12.E-9 
        tauf   : 128.E-9 
-       tauf2  : 0. 
-       tauoff : 0. 
-       taur2  : 0.
-       pheight: -0.045
-       mode   : 0             # 0:uni-polar  1: bipolar 
 
-    # other pulses (optional, if not given, use same as for trigger)
-     - taur   : 20.E-9
+    # pulse shape for trigger signal
+    #   optional - if not given, uses pulseShape
+    trgPulseShape:
+     - pheight: -0.045
+       taur   : 20.E-9
        tauon  : 12.E-9 
        tauf   : 128.E-9 
-       tauf2  : 0. 
-       tauoff : 0. 
-       taur2  : 0.
-       pheight: -0.035
-       mode   : 0             # 0:uni-polar  1: bipolar 
 
-    # Display Modules to be started
+  # Display Modules to be started
     modules: [RMeter, Display, Hists]
 
     # Definition of Histograms
