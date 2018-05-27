@@ -33,11 +33,9 @@ The code also runs on a Raspberry Pi.
 
 ## Program Execution
 
-The program may be started on the command line (`runCosmo.py`) or via a  
-graphical interface (`CosmoGui.py`)
+The program may be started on the command line (`runCosmo.py`) or via a graphical interface (`CosmoGui.py`).
 Both are controlled by an input file in `.yaml` format, specifying
-configuration of the the PicoScope device, the Buffer Manager and the   
-pulse filter:
+configuration of the the PicoScope device, the Buffer Manager and the pulse filter:
 
    ./runCosmo xxx.daq
 
@@ -49,8 +47,8 @@ for the PicoScope device, the Buffer Manager and the Pulse Filter.
 The graphical interface can also be initialized with a configuration file:
 
    ./CosmoGui xxx.daq
-Alternatively, the configuration file can be selected and edited in the  
-graphical interface. 
+   
+Alternatively, the configuration file can be selected and edited in the graphical interface.
 
 The graphical interface allows to inspect and modify the configuration and to start a new run. Configuration and output files are
 stored in a newly created directory `<Run Tag>_<date>/`, where a specific `<Run Tag>` can be specified by the user.
@@ -161,11 +159,10 @@ here:
 
     # pulse parameters
     #         ______
-    #        /      \  
-    #     _ /_ _ _ _ \_ _ _ _ _ _ _   
-    #                 \__________/
-    #      r    on  f f2   off  r2 
-    #                 f2 - r2 for bi-polar only
+    #        /      \
+    #     _ /_ _ _ _ \_
+    #        r  on   f
+    #
 
     # pulse shape(s) for channels
     #    if only one given, it is used for all channels
@@ -183,7 +180,7 @@ here:
        tauon  : 12.E-9 
        tauf   : 128.E-9 
 
-  # Display Modules to be started
+    # Display Modules to be started  
     modules: [RMeter, Display, Hists]
 
     # Definition of Histograms
@@ -209,5 +206,5 @@ produce graphical displays of the waveforms. These pictures are also contained i
 The parameters of events containing double-pulses are stored in file
 dpKanne2_180403.dat. An unbinned log-likelihood fit of measured
 lifetimes between 1.5 µs and 15. µs with the script `fit_dpData.py`
-yields the result shown in figure `life-ofMU_<date>.png`.    
+yields the result shown in figure `life-ofMU_<date>.png`.
 
