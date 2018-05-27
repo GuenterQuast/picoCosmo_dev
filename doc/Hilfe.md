@@ -6,7 +6,8 @@ Auslese mittels einer Photoröhre).
 
 Die Daten werden mit einem modernen USB-Oszilloskop
 (PicoScope der Firma PichoTechnology) aufgenommen.
-Ein Puffer-Manager sammelt und verteilt die aufgezeichneten Pulsformen an Consumer-Prozesse, die
+Ein Puffer-Manager sammelt und verteilt die aufgezeichneten
+Pulsformen an Consumer-Prozesse, die
 sie in Echtzeit anzeigen oder die Daten analysieren.
 
 Die Analyse der aufgezeichneten Pulsformen verläuft in drei Schritten:
@@ -58,7 +59,7 @@ Das folgende Beispiel gilt für den Kamiokanne-Detektor:
 
     DeviceFile: config/PMpulse.yaml  # Oscilloscope configuration
     BMfile:     config/BMconfig.yaml # Buffer Manager config.
-    PFfile:     config/PFconfig.yaml # Pulse Filter config.
+    PFfile:     config/PFKanne.yaml # Pulse Filter config.
 
 Die Konfigurationsdateien werden in die grafische Oberfläche
 geladen und können dort editiert werden.

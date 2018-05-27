@@ -1,11 +1,11 @@
 # Software zur Auslese und Analyse der Experimente des Netzwerks Teilchenwelt
 
 *Kurzfassung:*  
- Python-Script zur Auswertung der Daten der CosMO-Detektoren
- und der Kamiokanne des Netzwerks Teilchenwelt mit einem USB-
- Oszilloskop der Firma PicoTechnology 
+ Python-Script zur Aufnahme und Auswertung der Daten der CosMO-Detektoren
+ und der Kamiokanne des Netzwerks Teilchenwelt mit einem USB-Oszilloskop
+ der Firma PicoTechnology 
 
-## Beschreibung der Software
+## Beschreibung der Funktionalität
 
 Das Netzwerk Teilchenwelt, <http://www.Teilchenwelt.de> stellt Experimente
 zum Nachweis von Myonen aus der kosmischem Strahlung zur Verfügung.
@@ -15,14 +15,20 @@ gemacht werden können.
 
 Moderne USB-Oszilloskope wie das PicoScope der Firma PichoTechnology, siehe <http://www.picotech.com>, erlauben es, die Pulsformen nicht nur
 anzuzeigen, sondern auch in Echtzeit aufzuzeichnen und zu analysieren.
-Diesem Zweck dient das hier beschriebene Projekt "picoCosmo". Es ist auf Linux-Systemen und auch auf dem Raspberry Pi lauffähig.
+Diesem Zweck dient das hier beschriebene Projekt "`picoCosmo`". Es ist auf Linux-Systemen und auch auf dem Raspberry Pi lauffähig.
+`picoCosmo` nutzt zur Datenaufname den Puffermanager und die Echtzeit-Anzeigen
+des Projekts `picoDAQ` (<https://github.com/Guenter.Quast/picoDAQ>). Der Puffermanager von `picoDAQ` sammelt die Daten
+und verteilt sie an Echtzeit-Anzeigen oder weitere Prozesse zur Datenauswertung.
+`picoCosmo` ist eine angepasste und um umfangreiche Funktionalität zur
+Datenauswertung erweiterte Variante des Scripts `runDAQ.py` aus dem Projekt
+`picoDAQ`.
 
 Die Analyse der aufgezeichneten Pulsformen verläuft in drei Schritten:
 
 1. #### Validierung der Trigger-Schwelle des Oszilloskops
    Dazu wird der Signalverlauf um den Triggerzeitpunkt mit einem
    Musterpuls verglichen und das Signal akzeptiert, wenn die Form gut
-   übereinstimmt und eine Mindest-Pulshöhe überschritten wird.
+   übereinstimmt und der Puls eine Mindesthöhe überschreitet.
 
 2. #### Suche nach Koinzidenzen
    Als nächstes werden Pulse auf allen aktiven Kanälen in der Nähe
@@ -33,7 +39,7 @@ Die Analyse der aufgezeichneten Pulsformen verläuft in drei Schritten:
 
 3. #### Suche nach verzögerten Pulsen
    Im optionalen dritten Schritt werden weitere Pulse auf allen
-   aktiven Kanlälen gesucht und die Zeitdifferenz zum
+   aktiven Kanälen gesucht und die Zeitdifferenz zum
    Triggerzeitpunkt festgehalten. Solche Pulse treten auf,
    wenn ein Myon aus der kosmischen Strahlung nach Durchgang
    durch den bzw. die Detektoren gestoppt und das aus dem Zerfall
@@ -42,9 +48,11 @@ Die Analyse der aufgezeichneten Pulsformen verläuft in drei Schritten:
    einer mittleren Lebensdauern von 2,2 µs, die auf diese Weise
    bestimmt werden kann.
 
-Die Software bietet Echtzeit-Anzeigen der Myon-Rate, der aufgenommenen Pulshöhen und der Myon-Lebensdauern. Zusätzlich können Mehrfach-Pulse
+Die Software bietet Echtzeit-Anzeigen der Myon-Rate, der aufgenommenen
+Pulshöhen und der Myon-Lebensdauern. Zusätzlich können Mehrfach-Pulse
 als Rohdaten der registrierten Pulsformen oder als Bilder im `.png`-Format
 gespeichert werden.
+
 
 ###Abhängigkeiten von anderen Paketen
 
@@ -67,9 +75,11 @@ ab, die zuvor auf Ihrem System installiert sein müssen:
 ## Programmausführung
 
 Der Code kann entweder auf der Linux-Kommandozeile über das
-Script `runCosmo.py` oder über eine grafische Oberfläche, `CosmoGui.py`, gestartet werden.
+Script `runCosmo.py` oder über eine grafische Oberfläche,
+`CosmoGui.py`, gestartet werden.
 
-Die benötigten Information zur Konfiguration des USB-Oszilloskops, der Pufferverwaltung zur Bereitstellung der Daten und die Pulsanalyse werden in Konfigurationsdateien im `.yaml`-Format bereit gestellt.
+Die benötigten Information zur Konfiguration des USB-Oszilloskops, der Pufferverwaltung zur Bereitstellung der Daten und die Pulsanalyse werden
+in Konfigurationsdateien im `.yaml`-Format bereit gestellt.
 Die für eine spezielle Konfiguration verwendeten Dateien sind in
 einer Datei im `.yaml`-Format mit der Endung `.daq` enthalten.
 
@@ -79,13 +89,16 @@ Der Start der Software auf der Kommandozeile erfolgt mit dem Befehl
 
      - xxx = Cosmo : Konfiguration für Cosmo-Panels
      - xxx = Kanne : Konfiguration für die  Kamiokanne
-Die Datei enthält die Namen der Konfigurationsdateien, die für das PicoScope, den Puffer-Manager und die Pulsanalyse verwendet werden. 
+Die Datei enthält die Namen der Konfigurationsdateien, die für das
+PicoScope, den Puffer-Manager und die Pulsanalyse verwendet werden.
 
-Auch die grafische Oberfläche kann analog mit einer Konfiguration initialisiert werden: 
+Auch die grafische Oberfläche kann analog mit einer Konfiguration
+initialisiert werden:
 
     ./CosmoGui xxx.daq
 
-Die Konfigurationsdatei kann aber auch mittels der grafischen Oberfläche geladen und die Konfiguration editiert werden.
+Die Konfigurationsdatei kann aber auch mittels der grafischen Oberfläche
+geladen und die Konfiguration editiert werden.
 Über die grafische Oberfläche kann ein Name für die Datennahme
 festgelegt werden. Alle für eine Datennahme (einen sogenannten
 `Run`) benötigten Konfigurationsdateien und die Programmausgaben
@@ -109,7 +122,7 @@ müssen die folgenden Pakete installiert werden:
 
 
 Zur Vereinfachung sind im Unterverzeichnis `whl/` kompatible
-Versionen der Module `picoscope` aus dem Paket `pico-pyhton`
+Versionen der Module `picoscope` aus dem Paket `pico-python`
 und `picodaqa` aus dem Paket `picoDAQ` als `python-wheels`
 enthalten, die mittels
 
@@ -190,7 +203,7 @@ für jeden Kanal sowie die zu startenden Anzeige-Module an.
 Sie enthält auch die Spezifikation der Echtzeit-Histogramme für
 Pulshöhen, Myon-Rate und Lebensdauer. Ein Beispiel ist hier gezeigt:
 
-    # file PFconfig.yaml
+    # file PFKanne.yaml
     # -------------------
     # Configuration file for PulseFilter with Kamiokanne
 

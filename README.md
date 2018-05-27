@@ -9,7 +9,11 @@ scintillator panels of the *CosMO*-experiment by "Netzwerk Teilchenwelt",
 water-cherenkov detector with photomultiplier readout). 
 
 
-Data is read from the PicoScope device via a Buffer Manager, which collects recorded waveforms and distributes them to consumer processes. The consumers either provide real-time displays of a sub-set of the data or perform data analysis.
+Data is read from the PicoScope device via a Buffer Manager, see project `picoDAQ'
+(<https://github.com/GuenterQuast/picoDAQ>),
+which records waveforms and distributes them to
+consumer processes. The consumers either provide real-time displays of a sub-set of the data or perform data analysis. `piocoCosmo` is a specialised and extended
+version of the script `runDAQ.py` from project `picoDAQ`.
  
 The analysis proceeds in three steps. First, the trigger is validated by cross-correlation with a signal template located around the trigger time. Next, coincidences near a validated triggering pulse are searched for in all connected channels. The optional third step performs a search for additional pulses after the triggering event, indicating the decay of a stopped muon in or near the detector.
 
@@ -47,7 +51,7 @@ for the PicoScope device, the Buffer Manager and the Pulse Filter.
 The graphical interface can also be initialized with a configuration file:
 
    ./CosmoGui xxx.daq
-   
+
 Alternatively, the configuration file can be selected and edited in the graphical interface.
 
 The graphical interface allows to inspect and modify the configuration and to start a new run. Configuration and output files are
@@ -56,19 +60,19 @@ stored in a newly created directory `<Run Tag>_<date>/`, where a specific `<Run 
 
 ##Installation
 
-  - Install the PicoTech Software Development Kit from  
+  - Install the PicoTech Software Development Kit from
     <https://www.picotech.com/library/oscilloscopes/picoscope-software-development-kit-sdk>.
-  - Install the `pico-pyhton` package from   
+  - Install the `pico-pyhton` package from
     <https://github.com/colinoflynn/pico-python>.
-  - Install the picoDAQ package, vers. >= 0.7.2 from 
-    <https://github.com/GuenterQuast/picoDAQ>. 
+  - Install the picoDAQ package, vers. >= 0.7.2 from
+    <https://github.com/GuenterQuast/picoDAQ>.
   - Download all files from this project
     <https://github.com/GuenterQuast/picoCosmo>.
 
 For your convenience, the sub-directory `whl/` contains
-compatible versions of `picoscope` from package `pico-pyhton`
-and `picodaqa` from package `picoDAQ` as python-wheels, which
-you may install via *pip install package-<vers\>-<tags\>.whl*.
+compatible versions of `picoscope` from package
+`pico-python` and `picodaqa` from package `picoDAQ` as
+python-wheels, which you may install via *pip install package-<vers\>-<tags\>.whl*.
 
 ## Configuration and program execution
 
@@ -101,7 +105,7 @@ The  `.yaml` files specify configurations for the oscilloscope, the BufferManage
 
     DeviceFile: config/PMpulse.yaml   # Oscilloscope configuration file
     BMfile:     config/BMconfig.yaml  # Buffer Manager configuration
-    PFfile:     config/PFconfig.yaml  # Pulse Filter Configuration 
+    PFfile:     config/PFKanne.yaml   # Pulse Filter Configuration 
 
 The oscilloscope configuration specifies the oscilloscope model,
 the active channels and the trigger conditions:
@@ -147,7 +151,7 @@ pulse heights for every connected channel, the display modules
 to be started and and the definition of real-time histograms for pulse heights, muon rate and muon life-time. An example is shown
 here: 
 
-    # file PFconfig.yaml
+    # file PFKanne.yaml
     # -------------------
     # Configuration file for PulseFilter with Kamiokanne
 

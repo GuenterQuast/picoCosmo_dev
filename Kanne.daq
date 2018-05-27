@@ -2,5 +2,5 @@
 
 DeviceFile:    config/PMpulse.yaml
 BMfile:        config/BMconfig.yaml
-PFfile:        config/PFconfig.yaml
+PFfile:        config/PFKanne.yaml
 
