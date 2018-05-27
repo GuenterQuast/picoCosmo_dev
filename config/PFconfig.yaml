@@ -1,4 +1,5 @@
-# Configuration file for PulseFilter
+# demo configuration file for PulseFilter
+#    documets all options
 
 # output files 
 #logFile: pFilt   # store all pulses, Null to disable
@@ -15,8 +16,20 @@ pictFile: dpFigs   # save pictures of double pulses
 #      r   on  f 
 #                 
 
-# shape for all pulses
 pulseShape:
+# channel A:
+ - pheight: -0.040
+   taur   : 20.E-9
+   tauon  : 12.E-9 
+   tauf   : 128.E-9 
+# channel B: 
+ - pheight: -0.040
+   taur   : 20.E-9
+   tauon  : 12.E-9 
+   tauf   : 128.E-9 
+
+trgPulseShape:
+# trigger pulse
  - pheight: -0.040
    taur   : 20.E-9
    tauon  : 12.E-9 
