@@ -201,7 +201,7 @@ class PulseFilter(object):
     if self.verbose:
       print('*==*  Pulse Filter: pulse parameters set:')
       for iC in range(self.NChan):
-        idP = min(iC, self.NChan - 1) # Channel Pulse Shape 
+        idP = min(iC, self.NShapes - 1) # Channel Pulse Shape 
         print(8*' '+\
             '%s: τ_r: %.3gs, τ_on: %.3gs, τ_f: %.3gs, height: %.3gV'\
           %(self.ChanNames[iC],
