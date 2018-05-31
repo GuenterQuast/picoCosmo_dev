@@ -57,8 +57,8 @@
      <widget class="QLabel" name="label_Picture">
       <property name="geometry">
        <rect>
-        <x>130</x>
-        <y>80</y>
+        <x>131</x>
+        <y>82</y>
         <width>280</width>
         <height>251</height>
        </rect>
@@ -80,8 +80,8 @@
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>50</y>
-        <width>371</width>
+        <y>60</y>
+        <width>401</width>
         <height>20</height>
        </rect>
       </property>
@@ -91,7 +91,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Kamiokanne &amp; CosMO Detectors with PicoScope</string>
+       <string>Kamiokanne &amp; CosMO Detector with PicoScope</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_DAQconfig">
@@ -121,7 +121,7 @@
        <rect>
         <x>110</x>
         <y>360</y>
-        <width>330</width>
+        <width>331</width>
         <height>32</height>
        </rect>
       </property>
@@ -142,7 +142,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>410</y>
+        <y>470</y>
         <width>60</width>
         <height>30</height>
        </rect>
@@ -164,7 +164,7 @@
       <property name="geometry">
        <rect>
         <x>110</x>
-        <y>410</y>
+        <y>470</y>
         <width>113</width>
         <height>31</height>
        </rect>
@@ -206,7 +206,7 @@
       <property name="geometry">
        <rect>
         <x>450</x>
-        <y>359</y>
+        <y>360</y>
         <width>71</width>
         <height>34</height>
        </rect>
@@ -225,10 +225,10 @@
      <widget class="QPushButton" name="pB_abort">
       <property name="geometry">
        <rect>
-        <x>449</x>
-        <y>2</y>
+        <x>454</x>
+        <y>-1</y>
         <width>80</width>
-        <height>30</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="toolTip">
@@ -252,6 +252,55 @@
       </property>
       <property name="autoDefault">
        <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lE_WorkDir">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>410</y>
+        <width>331</width>
+        <height>32</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_WorkDir">
+      <property name="geometry">
+       <rect>
+        <x>23</x>
+        <y>413</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Latin Modern Sans</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Work Dir:</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pB_WDselect">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>410</y>
+        <width>71</width>
+        <height>34</height>
+       </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;select DAQ configuration file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>select</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>images/open-folder.jpg</normaloff>images/open-folder.jpg</iconset>
       </property>
      </widget>
     </widget>

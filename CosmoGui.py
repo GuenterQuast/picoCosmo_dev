@@ -36,14 +36,14 @@ class Ui_CosmoWindow(object):
         self.Tab_Control.setWhatsThis("")
         self.Tab_Control.setObjectName("Tab_Control")
         self.label_Picture = QtWidgets.QLabel(self.Tab_Control)
-        self.label_Picture.setGeometry(QtCore.QRect(130, 80, 280, 251))
+        self.label_Picture.setGeometry(QtCore.QRect(131, 82, 280, 251))
         self.label_Picture.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.label_Picture.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.label_Picture.setText("")
         self.label_Picture.setPixmap(QtGui.QPixmap("images/picoCosmo_iconic.jpg"))
         self.label_Picture.setObjectName("label_Picture")
         self.label_caption = QtWidgets.QLabel(self.Tab_Control)
-        self.label_caption.setGeometry(QtCore.QRect(90, 50, 371, 20))
+        self.label_caption.setGeometry(QtCore.QRect(90, 60, 401, 20))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label_caption.setFont(font)
@@ -57,13 +57,13 @@ class Ui_CosmoWindow(object):
         self.label_DAQconfig.setTextFormat(QtCore.Qt.PlainText)
         self.label_DAQconfig.setObjectName("label_DAQconfig")
         self.lE_DAQConfFile = QtWidgets.QLineEdit(self.Tab_Control)
-        self.lE_DAQConfFile.setGeometry(QtCore.QRect(110, 360, 330, 32))
+        self.lE_DAQConfFile.setGeometry(QtCore.QRect(110, 360, 331, 32))
         self.lE_DAQConfFile.setText("")
         self.lE_DAQConfFile.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.lE_DAQConfFile.setReadOnly(True)
         self.lE_DAQConfFile.setObjectName("lE_DAQConfFile")
         self.label = QtWidgets.QLabel(self.Tab_Control)
-        self.label.setGeometry(QtCore.QRect(30, 410, 60, 30))
+        self.label.setGeometry(QtCore.QRect(30, 470, 60, 30))
         font = QtGui.QFont()
         font.setFamily("Latin Modern Sans")
         font.setPointSize(11)
@@ -71,7 +71,7 @@ class Ui_CosmoWindow(object):
         self.label.setTextFormat(QtCore.Qt.PlainText)
         self.label.setObjectName("label")
         self.lE_RunTag = QtWidgets.QLineEdit(self.Tab_Control)
-        self.lE_RunTag.setGeometry(QtCore.QRect(110, 410, 113, 31))
+        self.lE_RunTag.setGeometry(QtCore.QRect(110, 470, 113, 31))
         self.lE_RunTag.setObjectName("lE_RunTag")
         self.pB_StartRun = QtWidgets.QPushButton(self.Tab_Control)
         self.pB_StartRun.setGeometry(QtCore.QRect(430, 461, 101, 40))
@@ -81,13 +81,13 @@ class Ui_CosmoWindow(object):
         self.pB_StartRun.setIconSize(QtCore.QSize(24, 24))
         self.pB_StartRun.setObjectName("pB_StartRun")
         self.pB_FileSelect = QtWidgets.QPushButton(self.Tab_Control)
-        self.pB_FileSelect.setGeometry(QtCore.QRect(450, 359, 71, 34))
+        self.pB_FileSelect.setGeometry(QtCore.QRect(450, 360, 71, 34))
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("images/open-folder.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pB_FileSelect.setIcon(icon1)
         self.pB_FileSelect.setObjectName("pB_FileSelect")
         self.pB_abort = QtWidgets.QPushButton(self.Tab_Control)
-        self.pB_abort.setGeometry(QtCore.QRect(449, 2, 80, 30))
+        self.pB_abort.setGeometry(QtCore.QRect(454, -1, 80, 41))
         self.pB_abort.setAccessibleDescription("")
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap("images/application-exit.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -95,6 +95,20 @@ class Ui_CosmoWindow(object):
         self.pB_abort.setIconSize(QtCore.QSize(20, 20))
         self.pB_abort.setAutoDefault(False)
         self.pB_abort.setObjectName("pB_abort")
+        self.lE_WorkDir = QtWidgets.QLineEdit(self.Tab_Control)
+        self.lE_WorkDir.setGeometry(QtCore.QRect(110, 410, 331, 32))
+        self.lE_WorkDir.setObjectName("lE_WorkDir")
+        self.label_WorkDir = QtWidgets.QLabel(self.Tab_Control)
+        self.label_WorkDir.setGeometry(QtCore.QRect(23, 413, 81, 20))
+        font = QtGui.QFont()
+        font.setFamily("Latin Modern Sans")
+        font.setPointSize(11)
+        self.label_WorkDir.setFont(font)
+        self.label_WorkDir.setObjectName("label_WorkDir")
+        self.pB_WDselect = QtWidgets.QPushButton(self.Tab_Control)
+        self.pB_WDselect.setGeometry(QtCore.QRect(450, 410, 71, 34))
+        self.pB_WDselect.setIcon(icon1)
+        self.pB_WDselect.setObjectName("pB_WDselect")
         self.tab_Main.addTab(self.Tab_Control, "")
         self.Tab_Config = QtWidgets.QWidget()
         self.Tab_Config.setObjectName("Tab_Config")
@@ -174,7 +188,7 @@ class Ui_CosmoWindow(object):
         CosmoWindow.setWindowTitle(_translate("CosmoWindow", "CosmoGui"))
         self.tab_Main.setToolTip(_translate("CosmoWindow", "Help / Hilfe"))
         self.Tab_Control.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>Control Panel</p></body></html>"))
-        self.label_caption.setText(_translate("CosmoWindow", "Kamiokanne & CosMO Detectors with PicoScope"))
+        self.label_caption.setText(_translate("CosmoWindow", "Kamiokanne & CosMO Detector with PicoScope"))
         self.label_DAQconfig.setText(_translate("CosmoWindow", "DAQ config:"))
         self.lE_DAQConfFile.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>DAQ configuration file (type .daq)</p></body></html>"))
         self.label.setText(_translate("CosmoWindow", "Run Tag:"))
@@ -186,6 +200,9 @@ class Ui_CosmoWindow(object):
         self.pB_FileSelect.setText(_translate("CosmoWindow", "select"))
         self.pB_abort.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>Exit CosmoGui</p></body></html>"))
         self.pB_abort.setText(_translate("CosmoWindow", "Abort"))
+        self.label_WorkDir.setText(_translate("CosmoWindow", "Work Dir:"))
+        self.pB_WDselect.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>select DAQ configuration file</p></body></html>"))
+        self.pB_WDselect.setText(_translate("CosmoWindow", "select"))
         self.tab_Main.setTabText(self.tab_Main.indexOf(self.Tab_Control), _translate("CosmoWindow", "Control"))
         self.Tab_Config.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>Config Panel</p></body></html>"))
         self.tabWidget.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>Configuration Files</p></body></html>"))
@@ -202,6 +219,7 @@ class Ui_CosmoWindow(object):
         self.PB_Hilfe.setText(_translate("CosmoWindow", "Deutsch"))
         self.tab_Main.setTabText(self.tab_Main.indexOf(self.Tab_Help), _translate("CosmoWindow", "Help / Hilfe"))
 
+
 # --> code not generated by designer-qt5 and pyuic5 starts here --> 
 
         self.Window = CosmoWindow
@@ -217,11 +235,16 @@ class Ui_CosmoWindow(object):
         self.pTE_BMconfig.setFont(monofont)
         self.pTE_PFconfig.setFont(monofont)
 
+# set default Working Directory
+        self.WDname = os.getenv('HOME')
+        self.lE_WorkDir.setText(self.WDname)
+
 # define actions
         self.pB_abort.clicked.connect(QtCore.QCoreApplication.instance().quit) 
         self.rB_EditMode.clicked.connect(self.actionEditConfig) 
         self.pB_StartRun.clicked.connect(self.actionStartRun) 
         self.pB_FileSelect.clicked.connect(self.selectConfigFile)
+        self.pB_WDselect.clicked.connect(self.selectWD)
         self.PB_Help.clicked.connect(self.setHelp_EN)
         self.PB_Hilfe.clicked.connect(self.setHelp_DE)
 
@@ -275,6 +298,14 @@ class Ui_CosmoWindow(object):
         # print('selected File ' + str(FileName) )
         self.initDAQ(FileName)
 
+    def selectWD(self):
+      path2WD = QtWidgets.QFileDialog.getExistingDirectory(None, '~')
+      WDname = str(path2WD)
+      if WDname is not '' :
+        # print('selected Directory' + WDname )
+         self.lE_WorkDir.setText(WDname)
+         self.WDname = WDname
+
     def actionEditConfig(self):
         checked = self.rB_EditMode.isChecked()
         self.pTE_OsciConfig.setReadOnly(not checked)
@@ -295,31 +326,33 @@ class Ui_CosmoWindow(object):
 
         # generate config files for new run in dedicated subdirectory
         self.runDir = (RunTag + '_' + datetime)
-        if not os.path.exists(self.runDir): os.makedirs(self.runDir)
+        if not os.path.exists(self.WDname + '/' + self.runDir): 
+          os.makedirs(self.WDname + '/' + self.runDir)
 
         PSfile = RunTag + '_PSconf.yaml'
-        fPS = open(self.runDir + '/' + PSfile, 'w')
+        fPS = open(self.WDname + '/' + self.runDir + '/' + PSfile, 'w')
         print(PSconf, file = fPS )
         fPS.close()
 
         BMfile = RunTag + '_BMconf.yaml'
-        fBM = open(self.runDir + '/' + BMfile, 'w')
+        fBM = open(self.WDname + '/' + self.runDir + '/' + BMfile, 'w')
         print(BMconf, file = fBM )
         fBM.close()
 
         PFfile = RunTag + '_PFconf.yaml'
-        fPF = open(self.runDir + '/' + PFfile, 'w')
+        fPF = open(self.WDname + '/' +self.runDir + '/' + PFfile, 'w')
         print(PFconf, file = fPF )
         fPF.close()
 
         self.DAQfile = RunTag + '.daq'
-        fDAQ = open(self.runDir + '/' + self.DAQfile,'w')
+        fDAQ = open(self.WDname + '/' + self.runDir + '/' + self.DAQfile,'w')
         print('DeviceFile: ' + PSfile + '\n' +
               'BMfile: ' + BMfile + '\n' +
               'PFfile: ' + PFfile + '\n',
                file = fDAQ )
         fDAQ.close()
-        print("   - files for this run stored in directory " + self.runDir) 
+        print("   - files for this run stored in directory "\
+               + self.WDname + '/' + self.runDir) 
     # close GUI window and start runCosmo 
         print('\n*==* CosmoGui: closing window and starting runCosmo.py')
         self.Window.close()
@@ -331,8 +364,9 @@ class Ui_CosmoWindow(object):
         print('*==* CosmoGui: exit \n')
               
     def start_runCosmo(self):
-        subprocess.call(['../runCosmo.py ' + self.DAQfile],
-                      cwd = self.runDir, shell = True)
+        CosmoDir = os.getcwd()
+        subprocess.call([CosmoDir + '/runCosmo.py ' + self.DAQfile],
+                      cwd = self.WDname + '/' + self.runDir, shell = True)
         
 # - end Class Ui_CosmoWindow
 
@@ -357,4 +391,3 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - -
 
   MainWindow.show()
   sys.exit(app.exec_())
-
