@@ -36,7 +36,7 @@
      </rect>
     </property>
     <property name="toolTip">
-     <string>Help / Hilfe</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Output  / Configuration / Help&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="statusTip">
      <string/>
@@ -121,7 +121,7 @@
        <rect>
         <x>110</x>
         <y>360</y>
-        <width>331</width>
+        <width>371</width>
         <height>32</height>
        </rect>
       </property>
@@ -205,17 +205,17 @@
      <widget class="QPushButton" name="pB_FileSelect">
       <property name="geometry">
        <rect>
-        <x>450</x>
+        <x>490</x>
         <y>360</y>
-        <width>71</width>
+        <width>31</width>
         <height>34</height>
        </rect>
       </property>
       <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;select DAQ configuration file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;selecd daq configuration file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="text">
-       <string>select</string>
+       <string/>
       </property>
       <property name="icon">
        <iconset>
@@ -259,7 +259,7 @@
        <rect>
         <x>110</x>
         <y>410</y>
-        <width>331</width>
+        <width>371</width>
         <height>32</height>
        </rect>
       </property>
@@ -286,17 +286,17 @@
      <widget class="QPushButton" name="pB_WDselect">
       <property name="geometry">
        <rect>
-        <x>450</x>
+        <x>490</x>
         <y>410</y>
-        <width>71</width>
+        <width>31</width>
         <height>34</height>
        </rect>
       </property>
       <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;select DAQ configuration file&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;select working directory (where ouput is stored)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="text">
-       <string>select</string>
+       <string/>
       </property>
       <property name="icon">
        <iconset>
