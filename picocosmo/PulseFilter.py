@@ -402,6 +402,7 @@ class PulseFilter(object):
     # get event as obligatory consumer (sees all events)
       e = self.BM.getEvent(self.cId, mode=0)
       if e == None:
+        print('    PAnalysis: end event seen - closing down')
         break             # end if empty event or BM no longer active
 
       evNr, evTime, evData = e
@@ -660,3 +661,5 @@ class PulseFilter(object):
       if p.is_alive():
         if self.verbose: print('    PulseFilter: terminating ' + p.name)
         p.terminate()
+      else: 
+       if self.verbose: print('    PulseFilter: ' + p.name + ' terminated')

@@ -62,10 +62,12 @@ def stop_processes(proclst):
     Close all running processes at end of run
   '''
   for p in proclst: # stop all sub-processes
-    print('    terminating '+p.name)
-    p.terminate()
+    if p.is_alive():
+      print('    terminating ' + p.name)
+      p.terminate()
+    else:
+      print('    ' + p.name + ' terminated ')
   time.sleep(2)
-
 
 if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - - - -
 

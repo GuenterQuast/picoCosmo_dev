@@ -15,7 +15,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_CosmoWindow(object):
     def setupUi(self, CosmoWindow):
         CosmoWindow.setObjectName("CosmoWindow")
-        CosmoWindow.resize(530, 537)
+        CosmoWindow.resize(530, 547)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -29,7 +29,7 @@ class Ui_CosmoWindow(object):
         self.centralwidget.setSizePolicy(sizePolicy)
         self.centralwidget.setObjectName("centralwidget")
         self.tab_Main = QtWidgets.QTabWidget(self.centralwidget)
-        self.tab_Main.setGeometry(QtCore.QRect(-11, 0, 541, 541))
+        self.tab_Main.setGeometry(QtCore.QRect(-11, 0, 541, 551))
         self.tab_Main.setStatusTip("")
         self.tab_Main.setObjectName("tab_Main")
         self.Tab_Control = QtWidgets.QWidget()
@@ -63,7 +63,7 @@ class Ui_CosmoWindow(object):
         self.lE_DAQConfFile.setReadOnly(True)
         self.lE_DAQConfFile.setObjectName("lE_DAQConfFile")
         self.label = QtWidgets.QLabel(self.Tab_Control)
-        self.label.setGeometry(QtCore.QRect(30, 470, 60, 30))
+        self.label.setGeometry(QtCore.QRect(230, 465, 60, 30))
         font = QtGui.QFont()
         font.setFamily("Latin Modern Sans")
         font.setPointSize(11)
@@ -71,7 +71,7 @@ class Ui_CosmoWindow(object):
         self.label.setTextFormat(QtCore.Qt.PlainText)
         self.label.setObjectName("label")
         self.lE_RunTag = QtWidgets.QLineEdit(self.Tab_Control)
-        self.lE_RunTag.setGeometry(QtCore.QRect(110, 470, 113, 31))
+        self.lE_RunTag.setGeometry(QtCore.QRect(300, 466, 113, 31))
         self.lE_RunTag.setObjectName("lE_RunTag")
         self.pB_StartRun = QtWidgets.QPushButton(self.Tab_Control)
         self.pB_StartRun.setGeometry(QtCore.QRect(430, 461, 101, 40))
@@ -116,7 +116,7 @@ class Ui_CosmoWindow(object):
         self.Tab_Config.setObjectName("Tab_Config")
         self.tabWidget = QtWidgets.QTabWidget(self.Tab_Config)
         self.tabWidget.setEnabled(True)
-        self.tabWidget.setGeometry(QtCore.QRect(10, 10, 821, 501))
+        self.tabWidget.setGeometry(QtCore.QRect(10, 10, 821, 461))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -128,7 +128,7 @@ class Ui_CosmoWindow(object):
         self.OsciConfig = QtWidgets.QWidget()
         self.OsciConfig.setObjectName("OsciConfig")
         self.pTE_OsciConfig = QtWidgets.QPlainTextEdit(self.OsciConfig)
-        self.pTE_OsciConfig.setGeometry(QtCore.QRect(0, 10, 521, 451))
+        self.pTE_OsciConfig.setGeometry(QtCore.QRect(0, 10, 521, 411))
         self.pTE_OsciConfig.setReadOnly(True)
         self.pTE_OsciConfig.setObjectName("pTE_OsciConfig")
         self.tabWidget.addTab(self.OsciConfig, "")
@@ -140,14 +140,14 @@ class Ui_CosmoWindow(object):
         self.BMconfig.setSizePolicy(sizePolicy)
         self.BMconfig.setObjectName("BMconfig")
         self.pTE_BMconfig = QtWidgets.QPlainTextEdit(self.BMconfig)
-        self.pTE_BMconfig.setGeometry(QtCore.QRect(4, 10, 521, 451))
+        self.pTE_BMconfig.setGeometry(QtCore.QRect(4, 10, 521, 411))
         self.pTE_BMconfig.setReadOnly(True)
         self.pTE_BMconfig.setObjectName("pTE_BMconfig")
         self.tabWidget.addTab(self.BMconfig, "")
         self.PulseFilterConfig = QtWidgets.QWidget()
         self.PulseFilterConfig.setObjectName("PulseFilterConfig")
         self.pTE_PFconfig = QtWidgets.QPlainTextEdit(self.PulseFilterConfig)
-        self.pTE_PFconfig.setGeometry(QtCore.QRect(0, 10, 521, 451))
+        self.pTE_PFconfig.setGeometry(QtCore.QRect(0, 10, 521, 411))
         self.pTE_PFconfig.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.pTE_PFconfig.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.pTE_PFconfig.setReadOnly(True)
@@ -156,11 +156,14 @@ class Ui_CosmoWindow(object):
         self.rB_EditMode = QtWidgets.QRadioButton(self.Tab_Config)
         self.rB_EditMode.setGeometry(QtCore.QRect(410, 0, 91, 30))
         self.rB_EditMode.setObjectName("rB_EditMode")
+        self.pB_SaveDefault = QtWidgets.QPushButton(self.Tab_Config)
+        self.pB_SaveDefault.setGeometry(QtCore.QRect(190, 470, 141, 34))
+        self.pB_SaveDefault.setObjectName("pB_SaveDefault")
         self.tab_Main.addTab(self.Tab_Config, "")
         self.Tab_Help = QtWidgets.QWidget()
         self.Tab_Help.setObjectName("Tab_Help")
         self.TE_Help = QtWidgets.QTextEdit(self.Tab_Help)
-        self.TE_Help.setGeometry(QtCore.QRect(10, 30, 521, 471))
+        self.TE_Help.setGeometry(QtCore.QRect(10, 30, 521, 481))
         self.TE_Help.setUndoRedoEnabled(False)
         self.TE_Help.setReadOnly(True)
         self.TE_Help.setPlaceholderText("")
@@ -182,7 +185,7 @@ class Ui_CosmoWindow(object):
 
         self.retranslateUi(CosmoWindow)
         self.tab_Main.setCurrentIndex(0)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(CosmoWindow)
 
     def retranslateUi(self, CosmoWindow):
@@ -213,6 +216,8 @@ class Ui_CosmoWindow(object):
         self.pTE_PFconfig.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>Configuration File for Pulse Filter and Analysis</p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.PulseFilterConfig), _translate("CosmoWindow", "PulseFilterConfig"))
         self.rB_EditMode.setText(_translate("CosmoWindow", "Edit Mode"))
+        self.pB_SaveDefault.setToolTip(_translate("CosmoWindow", "Save as default configuration"))
+        self.pB_SaveDefault.setText(_translate("CosmoWindow", "Save as default"))
         self.tab_Main.setTabText(self.tab_Main.indexOf(self.Tab_Config), _translate("CosmoWindow", "Configuration"))
         self.Tab_Help.setToolTip(_translate("CosmoWindow", "<html><head/><body><p>Info &amp; Help</p></body></html>"))
         self.PB_Help.setText(_translate("CosmoWindow", "English"))
@@ -236,8 +241,14 @@ class Ui_CosmoWindow(object):
         self.pTE_BMconfig.setFont(monofont)
         self.pTE_PFconfig.setFont(monofont)
 
-# set default Working Directory
-        self.WDname = os.getenv('HOME')
+# find user home directory and create directory 'picoCosmo' 
+        self.homedir = os.getenv('HOME')
+        self.ConfDir = self.homedir + '/picoCosmo' 
+        if not os.path.exists(self.ConfDir): 
+          os.makedirs(self.ConfDir)
+
+# set initial working Directory
+        self.WDname = self.ConfDir 
         self.lE_WorkDir.setText(self.WDname)
 
 # define actions
@@ -248,6 +259,7 @@ class Ui_CosmoWindow(object):
         self.pB_WDselect.clicked.connect(self.selectWD)
         self.PB_Help.clicked.connect(self.setHelp_EN)
         self.PB_Hilfe.clicked.connect(self.setHelp_DE)
+        self.pB_SaveDefault.clicked.connect(self.saveDefaultConfig)
 
     def setHelp_DE(self):
       self.TE_Help.setText(open('doc/Hilfe.html', 'r').read() ) 
@@ -256,6 +268,8 @@ class Ui_CosmoWindow(object):
       self.TE_Help.setText(open('doc/help.html', 'r').read() )
 
     def initDAQ(self, DAQconfFile):
+      path, fname = os.path.split(DAQconfFile)
+      if path == '': path = '.'
       try:
         with open(DAQconfFile) as f:
           DAQconfdict=yaml.load(f)
@@ -285,9 +299,9 @@ class Ui_CosmoWindow(object):
         exit(1)
 
    # display config data in GUI
-      self.pTE_OsciConfig.setPlainText(open(PSfile, 'r').read() )
-      self.pTE_BMconfig.setPlainText(open(BMfile, 'r').read() )
-      self.pTE_PFconfig.setPlainText(open(PFfile, 'r').read() )
+      self.pTE_OsciConfig.setPlainText(open(path + '/' + PSfile, 'r').read() )
+      self.pTE_BMconfig.setPlainText(open(path + '/' + BMfile, 'r').read() )
+      self.pTE_PFconfig.setPlainText(open(path + '/' + PFfile, 'r').read() )
 
 # - end iniDAQ
 
@@ -312,6 +326,37 @@ class Ui_CosmoWindow(object):
         self.pTE_OsciConfig.setReadOnly(not checked)
         self.pTE_BMconfig.setReadOnly(not checked)
         self.pTE_PFconfig.setReadOnly(not checked)
+
+    def saveDefaultConfig(self):
+        # save configuration in ~/picoCosmo/config
+        cDir = self.ConfDir +'/config' 
+        if not os.path.exists(cDir):
+          os.makedirs(cDir)
+        
+
+        # retrieve actual configuration from GUI
+        PSconf = self.pTE_OsciConfig.toPlainText() 
+        PSfile = 'PSconf.yaml'
+        BMconf = self.pTE_BMconfig.toPlainText() 
+        BMfile = 'BMconf.yaml'
+        PFconf = self.pTE_PFconfig.toPlainText() 
+        PFfile = 'PFconf.yaml'
+        fPS = open(cDir + '/' + PSfile, 'w')
+        print(PSconf, file = fPS )
+        fPS.close()
+        fBM = open(cDir + '/' + BMfile, 'w')
+        print(BMconf, file = fBM )
+        fBM.close()
+        fPF = open(cDir + '/' + PFfile, 'w')
+        print(PFconf, file = fPF )
+        fPF.close()
+        DAQconf = 'DeviceFile: ' + PSfile + '\n' +\
+                  'BMfile: ' + BMfile + '\n' +\
+                  'PFfile: ' + PFfile + '\n'
+        DAQfile= 'default.daq'
+        fDAQ = open(cDir + '/' + DAQfile, 'w')
+        print(DAQconf, file = fDAQ )
+        fDAQ.close()
 
     def actionStartRun(self):
         # start script runCosmo.py in subdirectory
@@ -373,14 +418,23 @@ class Ui_CosmoWindow(object):
 
 if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - -
 
-  print('\n*==* ' + sys.argv[0] + ' running \n')
+  script = sys.argv[0]
+  print('\n*==* ' + script + ' running \n')
+
+  # change working directory to place where CosmoGui.py lives
+  path, sname = os.path.split(script)
+  os.chdir(path)
+
+  homedir = os.getenv('HOME')
 
 # check for / read command line arguments
-  # read DAQ configuration file
+  # get DAQ configuration file
   if len(sys.argv)==2:
     DAQconfFile = sys.argv[1]
-  else: 
-    DAQconfFile = 'default.daq'
+  elif os.path.exists(homedir + '/picoCosmo/config'): 
+    DAQconfFile = homedir + '/picoCosmo/config/default.daq'
+  else:
+    DAQconfFile = path + '/' + 'default.daq'
 
 # start GUI
   app = QtWidgets.QApplication(sys.argv)
