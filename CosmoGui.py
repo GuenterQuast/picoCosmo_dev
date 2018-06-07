@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # script CosmoGui.py
+from __future__ import print_function, division, unicode_literals
+from __future__ import absolute_import
 
 ''' 
   A simple GUI to edit configuration files and start run via runCosmo.py
@@ -434,10 +436,11 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - -
   elif os.path.exists(homedir + '/picoCosmo/config'): 
     DAQconfFile = homedir + '/picoCosmo/config/default.daq'
   else:
-    DAQconfFile = path_to_picoCosmo + '/' + 'default.daq'
+    DAQconfFile = 'default.daq'
 
 # start GUI
-  os.chdir(path_to_picoCosmo) # change path to where CosmoGui lives
+  if path_to_picoCosmo!= '':
+    os.chdir(path_to_picoCosmo) # change path to where CosmoGui lives
   app = QtWidgets.QApplication(sys.argv)
   MainWindow = QtWidgets.QMainWindow()
   ui = Ui_CosmoWindow()
