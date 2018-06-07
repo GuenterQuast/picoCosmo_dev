@@ -268,7 +268,8 @@ class Ui_CosmoWindow(object):
       self.TE_Help.setText(open('doc/help.html', 'r').read() )
 
     def initDAQ(self, DAQconfFile):
-      path, fname = os.path.split(DAQconfFile)
+      # initialize DAQ from config files - need absolute path
+      path = os.path.dirname(DAQconfFile)
       if path == '': path = '.'
       try:
         with open(DAQconfFile) as f:
@@ -421,28 +422,29 @@ if __name__ == "__main__": # - - - - - - - - - - - - - - - - - - - -
   script = sys.argv[0]
   print('\n*==* ' + script + ' running \n')
 
-  # change working directory to place where CosmoGui.py lives
-  path, sname = os.path.split(script)
-  os.chdir(path)
-
+  # get relevant paths
+  path_to_picoCosmo = os.path.dirname(script)
   homedir = os.getenv('HOME')
 
 # check for / read command line arguments
   # get DAQ configuration file
   if len(sys.argv)==2:
-    DAQconfFile = sys.argv[1]
+    DAQconfFile = os.path.abspath(sys.argv[1]) # with full path to file
+    print (DAQconfFile)
   elif os.path.exists(homedir + '/picoCosmo/config'): 
     DAQconfFile = homedir + '/picoCosmo/config/default.daq'
   else:
-    DAQconfFile = path + '/' + 'default.daq'
+    DAQconfFile = path_to_picoCosmo + '/' + 'default.daq'
 
 # start GUI
+  os.chdir(path_to_picoCosmo) # change path to where CosmoGui lives
   app = QtWidgets.QApplication(sys.argv)
   MainWindow = QtWidgets.QMainWindow()
   ui = Ui_CosmoWindow()
   ui.setupUi(MainWindow)
 
   ui.initDAQ(DAQconfFile)
+
 
   MainWindow.show()
   sys.exit(app.exec_())
