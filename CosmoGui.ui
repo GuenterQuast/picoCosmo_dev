@@ -42,7 +42,7 @@
      <string/>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="Tab_Control">
      <property name="toolTip">
@@ -189,7 +189,7 @@
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Start Runinng Oscilloscope, Buffer Manager and Pulse Filter&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="text">
-       <string>StartRun</string>
+       <string>  StartRun</string>
       </property>
       <property name="icon">
        <iconset>
