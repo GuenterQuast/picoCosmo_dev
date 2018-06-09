@@ -6,18 +6,26 @@
 The software is tailored to identify short pulses from muon detectors (the 
 scintillator panels of the *CosMO*-experiment by "Netzwerk Teilchenwelt",
 <http://www.teilchenwelt.de>, or the *Kamiokanne*-Experiment (a
-water-cherenkov detector with photomultiplier readout). 
+water-Cherenkov detector with photomultiplier readout). 
 
 
 Data is read from the PicoScope device via a Buffer Manager, see project `picoDAQ'
 (<https://github.com/GuenterQuast/picoDAQ>),
 which records waveforms and distributes them to
-consumer processes. The consumers either provide real-time displays of a sub-set of the data or perform data analysis. `piocoCosmo` is a specialised and extended
-version of the script `runDAQ.py` from project `picoDAQ`.
+consumer processes. The consumers either provide real-time displays of a
+sub-set of the data or perform data analysis. `piocoCosmo` is a specialised
+and extended version of the script `runDAQ.py` from project `picoDAQ`.
  
-The analysis proceeds in three steps. First, the trigger is validated by cross-correlation with a signal template located around the trigger time. Next, coincidences near a validated triggering pulse are searched for in all connected channels. The optional third step performs a search for additional pulses after the triggering event, indicating the decay of a stopped muon in or near the detector.
+The analysis proceeds in three steps. First, the trigger is validated by
+cross-correlation with a signal template located around the trigger time.
+Next, coincidences near a validated triggering pulse are searched for in all connected channels. The optional third step performs a search for additional pulses after the triggering event, indicating the decay of a stopped muon
+in or near the detector.
 
-The software provides real-time displays of waveforms, detector signals and rates. Optionally, parameters of identified pulses or of double-pulses are written to files in CSV format. In addition, raw waveforms or pictures in .png format of identified double pulses can optionally be stored for off-line analysis or for an instructive analysis "by hand" based on the waveform pictures. From this information, the mean muon lifetime in the muon rest frame (2.2 µs) can be derived. 
+The software provides real-time displays of waveforms, detector signals and rates. Optionally, parameters of identified pulses or of double-pulses are written to files in CSV format. In addition, raw waveforms or pictures in
+`.png` format of identified double pulses can optionally be stored for
+off-line analysis or for an instructive analysis "by hand" based on the
+waveform pictures. From this information, the mean muon lifetime in the
+muon rest frame (2.2 µs) can be derived. 
 
 
 ## Dependence on other packages
@@ -45,17 +53,21 @@ configuration of the the PicoScope device, the Buffer Manager and the pulse filt
 
      - Cosmo.daq : configuration for Cosmo-Panels
      - Kanne.daq : configuration for Kamiokanne
-These files contain the names of the files containing the configurations
-for the PicoScope device, the Buffer Manager and the Pulse Filter.
+These files contain the names of the files containing the actual
+configurations for the PicoScope device, the Buffer Manager and the
+Pulse Filter.
 
-The graphical interface can also be initialized with a configuration file:
+The graphical interface can also be initialized with such a 
+configuration file:
 
    ./CosmoGui xxx.daq
 
 Alternatively, the configuration file can be selected and edited in the graphical interface.
 
-The graphical interface allows to inspect and modify the configuration and to start a new run. Configuration and output files are
-stored in a newly created directory `<Run Tag>_<date>/`, where a specific `<Run Tag>` can be specified by the user.
+The graphical interface allows to inspect and modify the configuration,
+to select a working directory for the output files and to start a new run. Configuration and output files are stored in a newly created sub-directory
+`<Run Tag>_<date>/` in the selected working directory, where a 
+specific `<Run Tag>` can be defined by the user.
 
 
 ##Installation
@@ -72,7 +84,8 @@ stored in a newly created directory `<Run Tag>_<date>/`, where a specific `<Run 
 For your convenience, the sub-directory `whl/` contains
 compatible versions of `picoscope` from package
 `pico-python` and `picodaqa` from package `picoDAQ` as
-python-wheels, which you may install via *pip install package-<vers\>-<tags\>.whl*.
+python-wheels, which you may install via 
+*pip install package-<vers\>-<tags\>.whl*.
 
 ## Configuration and program execution
 

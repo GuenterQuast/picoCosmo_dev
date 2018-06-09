@@ -9,7 +9,9 @@
 
 Das Netzwerk Teilchenwelt, <http://www.Teilchenwelt.de> stellt Experimente
 zum Nachweis von Myonen aus der kosmischem Strahlung zur Verfügung.
-Dies sind die Szitillationszähler des CosMO-Experiments und der aus einer Kaffeekanne mit aufgesetzter Photoröhre bestehende Wasser-Cherenkov-Zähler "Kamiokanne". Diese Detektoren liefern kurze Signale von ca. 100 ns Dauer
+Dies sind die Szitillationszähler des CosMO-Experiments und der aus einer
+Kaffeekanne mit aufgesetzter Photoröhre bestehende Wasser-Cherenkov-Zähler
+"Kamiokanne". Diese Detektoren liefern kurze Signale von ca. 100 ns Dauer
 und einigen 10 bis 100 mV Pulshöhe, die mit einem Oszillographen sichtbar
 gemacht werden können.
 
@@ -98,12 +100,13 @@ initialisiert werden:
     ./CosmoGui xxx.daq
 
 Die Konfigurationsdatei kann aber auch mittels der grafischen Oberfläche
-geladen und die Konfiguration editiert werden.
-Über die grafische Oberfläche kann ein Name für die Datennahme
-festgelegt werden. Alle für eine Datennahme (einen sogenannten
-`Run`) benötigten Konfigurationsdateien und die Programmausgaben
-werden in einem eigenen Verzeichnis abgelegt, deren Name aus dem
-Namen für die Datennahme und dem Startzeitpunkt abgeleitet wird.
+geladen und die Konfigurationen editiert werden.
+Über die grafische Oberfläche kann ein Arbeitsverzeichnis für die
+Ausgabedateien und ein Name für die Datennahme festgelegt werden.
+Alle für eine Datennahme (einen sogenannten `Run`) benötigten
+Konfigurationsdateien und die Programmausgaben werden in einem
+eigenen Verzeichnis abgelegt, deren Name aus dem Namen für die
+Datennahme und dem Startzeitpunkt abgeleitet wird.
 
 
 ##Installation der Software
