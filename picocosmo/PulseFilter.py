@@ -363,10 +363,11 @@ class PulseFilter(object):
 
 # initialise event loop
     evcnt=0  # events seen
-    Nval=0  # events with valid pulse shape on trigger channel
+    Nval=0   # events with valid pulse shape on trigger channel
     Nacc=0
     Nacc2=0  # dual coincidences
-    Nacc3=0     # triple coincidences
+    Nacc3=0  # triple coincidences
+    Nacc4=0  # conincidence of four channels
     Ndble=0  # double pulses
     T0 = time.time()
 
@@ -492,6 +493,8 @@ class PulseFilter(object):
         Nacc2 += 1
       elif Ncoinc == 3:
         Nacc3 += 1
+      elif Ncoinc == 4:
+        Nacc4 += 1
 
 # search for double-pulses ?
       if self.DPanalysis:
@@ -554,7 +557,7 @@ class PulseFilter(object):
             print(', %.3f, %.3f'%(v,t), end='', file=self.logf)
           for ic in range(NChan):
             if len(VSig[ic]) > 2:
-              print(', %i, %.3f, %.3f'%(ic, VSig[ic][2],TSig[ic][2] ),
+              print(', %i, %.3f, %.3f'%(ic, VSig[ic][2], TSig[ic][2] ),
                   end='', file=self.logf)
         print('', file=self.logf)
 
@@ -575,6 +578,12 @@ class PulseFilter(object):
                   delT2s[0], delT2s[1], delT2s[2], 
                   sig2s[0], sig2s[1], sig2s[2]),
                   file=self.logfDP)
+        elif NChan==4:
+          print('%i, %i, %.4g,   %.4g, %.4g, %.4g, %.4g,   %.3g, %.3g, %.3g, %.3g'\
+                %(Nacc, Ndble, hTaus[-1], 
+                  delT2s[0], delT2s[1], delT2s[2], delT2s[3], 
+                  sig2s[0], sig2s[1], sig2s[2], sig2s[3]),
+                  file=self.logfDP)
 
       if self.rawf is not None and doublePulse: # write raw waveforms
         print( ' - ' + yaml.dump(np.around(evData, 5).tolist(),  
@@ -587,7 +596,7 @@ class PulseFilter(object):
         # ... and save to .png
         self.figOs.savefig(self.pDir+'/DPfig%03i'%(Ndble)+'.png') 
 
-# print to screen 
+# print to log file 
       if accepted and verbose > 1:
         if NChan ==1:
           self.prlog ('*==* PF: %i, %i, %.2f, %.3g, %.3g'\
@@ -598,10 +607,23 @@ class PulseFilter(object):
         elif NChan ==3:
           self.prlog ('*==* PF: %i, %i, %i, %i, %i, %.3g'\
               %(evcnt, Nval, Nacc, Nacc2, Nacc3, tevt) )
+        elif NChan ==4:
+          self.prlog ('*==* PF: %i, %i, %i, %i, %i, %.3g'\
+              %(evcnt, Nval, Nacc, Nacc2, Nacc3, Nacc4, tevt) )
 
-      if(verbose and evcnt%1000==0):
-        self.prlog("*==* PF: evt %i, Nval, Nacc, Nacc2, Nacc3: %i, %i, %i, %i"\
-              %(evcnt, Nval, Nacc, Nacc2, Nacc3))
+      if(verbose == 1 and evcnt%1000==0):
+        if NChan == 1:
+          self.prlog("*==* PF: evt %i, Nval: %i"\
+              %(evcnt, Nval))
+        elif NChan == 2:
+          self.prlog("*==* PF: evt %i, Nval, Nacc: %i, %i"\
+                     %(evcnt, Nval, Nacc))
+        elif NChan == 3:
+          self.prlog("*==* PF: evt %i, Nval, Nacc, Nacc2, Nacc3: %i, %i, %i, %i"\
+                     %(evcnt, Nval, Nacc, Nacc2, Nacc3))
+        elif NChan == 4:
+          self.prlog("*==* PF: evt %i, Nval, Nacc, Nacc2, Nacc3, Nacc4: %i, %i, %i, %i, %i"\
+                     %(evcnt, Nval, Nacc, Nacc2, Nacc3, Nacc4))
 
       if verbose and doublePulse:
         s = '%i, %i, %.4g'\
@@ -631,16 +653,23 @@ class PulseFilter(object):
 # add summary information to log-files
     tag = "# pulseFilter Summary: " 
     if self.logf is not None:
-      print(tag+"last evNR %i, Nval, Nacc, Nacc2, Nacc3: %i, %i, %i, %i"\
-        %(evcnt, Nval, Nacc, Nacc2, Nacc3),
-          file=self.logf )
+      print(tag+"last evNR %i, Nval, Nacc: %i, %i "%(evcnt, Nval, Nacc), 
+          end='', file=self.logf )
+      nac = [Nacc2, Nacc3, Nacc4]
+      for j in range(1, NChan):
+        print("Nacc%i = %i "%(j+1, nac[j-2]),
+          end='', file=self.logf )
+      print('\n', file = self.logf)
       self.logf.close()
 
     if self.logfDP is not None: 
-      print(tag+"last evNR %i, Nval, Nacc, Nacc2, Nacc3: %i, %i, %i, %i"\
-        %(evcnt, Nval, Nacc, Nacc2, Nacc3),
-          file=self.logfDP )
-      print("#                       %i double pulses"%(Ndble), 
+      print(tag+"last evNR %i, Nval, Nacc: %i, %i "%(evcnt, Nval, Nacc), 
+          end='', file=self.logfDP )
+      Nac = [Nacc2, Nacc3, Nacc4]
+      for j in range(1, NChan):
+        print("Nacc%i = %i "%(j+1, Nac[j-2]),
+          end='', file=self.logfDP )
+      print("\n#                       %i double pulses"%(Ndble), 
         file=self.logfDP )
       self.logfDP.close()
 
