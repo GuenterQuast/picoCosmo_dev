@@ -9,18 +9,23 @@
 
 Das Netzwerk Teilchenwelt, <http://www.Teilchenwelt.de> stellt Experimente
 zum Nachweis von Myonen aus der kosmischem Strahlung zur Verfügung.
-Dies sind die Szitillationszähler des CosMO-Experiments und der aus einer
+Dies sind die Szintillationszähler des CosMO-Experiments und der aus einer
 Kaffeekanne mit aufgesetzter Photoröhre bestehende Wasser-Cherenkov-Zähler
 "Kamiokanne". Diese Detektoren liefern kurze Signale von ca. 100 ns Dauer
 und einigen 10 bis 100 mV Pulshöhe, die mit einem Oszillographen sichtbar
 gemacht werden können.
 
 Moderne USB-Oszilloskope wie das PicoScope der Firma PichoTechnology, siehe <http://www.picotech.com>, erlauben es, die Pulsformen nicht nur
-anzuzeigen, sondern auch in Echtzeit aufzuzeichnen und zu analysieren.
-Diesem Zweck dient das hier beschriebene Projekt "`picoCosmo`". Es ist auf Linux-Systemen und auch auf dem Raspberry Pi lauffähig.
+anzuzeigen, sondern auch in Echtzeit an einen Commputer zu exportieren, mit
+dem sie dann aufgezeichnet, angezeigt und analysiert werden können.
+Diesem Zweck dient das hier beschriebene Projekt "`picoCosmo`". Es ist auf
+Linux-Systemen und auch auf dem Raspberry Pi lauffähig und unterstützt
+PicoScope-Geräte mit zwei oder vier Kanälen.
+
 `picoCosmo` nutzt zur Datenaufname den Puffermanager und die Echtzeit-Anzeigen
-des Projekts `picoDAQ` (<https://github.com/Guenter.Quast/picoDAQ>). Der Puffermanager von `picoDAQ` sammelt die Daten
-und verteilt sie an Echtzeit-Anzeigen oder weitere Prozesse zur Datenauswertung.
+des Projekts `picoDAQ` (<https://github.com/Guenter.Quast/picoDAQ>).
+Der Puffermanager von `picoDAQ` sammelt die Daten und verteilt sie an
+Echtzeit-Anzeigen oder weitere Prozesse zur Datenauswertung.
 `picoCosmo` ist eine angepasste und um umfangreiche Funktionalität zur
 Datenauswertung erweiterte Variante des Scripts `runDAQ.py` aus dem Projekt
 `picoDAQ`.
