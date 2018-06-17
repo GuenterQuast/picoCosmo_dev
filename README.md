@@ -19,9 +19,14 @@ and extended version of the script `runDAQ.py` from project `picoDAQ`.
  
 The analysis proceeds in three steps. First, the trigger is validated by
 cross-correlation with a signal template located around the trigger time.
-Next, coincidences near a validated triggering pulse are searched for in all connected channels. The optional third step performs a search for additional pulses after the triggering event, indicating the decay of a stopped muon in or near the detector.
+Next, coincidences near a validated triggering pulse are searched for in all
+connected channels. The optional third step performs a search for additional
+pulses after the triggering event, indicating the decay of a stopped muon
+in or near the detector.
 
-The software provides real-time displays of waveforms, detector signals and rates. Optionally, parameters of identified pulses or of double-pulses are written to files in CSV format. In addition, raw waveforms or pictures in
+The software provides real-time displays of waveforms, detector signals and
+rates. Optionally, parameters of identified pulses or of double-pulses are
+written to files in CSV format. In addition, raw waveforms or pictures in
 `.png` format of identified double pulses can optionally be stored for
 off-line analysis or for an instructive analysis "by hand" based on the
 waveform pictures. From this information, the mean muon lifetime in the
@@ -90,7 +95,7 @@ python-wheels, which you may install via
 ## Configuration and program execution
 
 As stated above, data Acquisition and Analysis is started using the
-graphical interface by typing `./CosmoGui.py xxx.daq`, or optionally, 
+graphical interface by typing `./CosmoGui.py xxx.daq`, or optionally,
 by directly starting the pyhton script for run execution with the
 command `./runCosmo xxxx.daq`.
 
@@ -99,16 +104,17 @@ BufferManager, which contains the options `Pause`, `Resume`,
 `Stop` and `EndRun`. In stopped state, all windows remain open
 and graphs may be saved and log-output inspected. In End-state,
 all processes are stopped, and consequently all windows disappear.
-Resume running from Stop-state is presently not foreseen. 
+Resume running from Stop-state is presently not foreseen.
 
-A helper script, plotDoublePulses.py, allow to read in stored
-raw waveforms from the double-pulse search and display them as an
-oscilloscope display. Code to store each picture as a `.png`
-is included, but commented out.
+Helper script, plotDoublePulses.py and makeFigs.py, allow to read
+stored raw waveforms in text or zip format from the double-pulse
+search and display resp. store them as images in `.png` format.
 
-The configuration for the `runCosmo.py` is defined in several '.yaml' files contained in sub-directory `config/`. The files used for
-a specific configuration are listed in files of type `.daq`, e.g. `Kanne.daq` for Kamiokanne and `Cosmo.daq` for a run with the 
-CosMo panels. 
+The configuration for the `runCosmo.py` is defined in several '.yaml'
+files contained in sub-directory `config/`. The files used for
+a specific configuration are listed in files of type `.daq`,
+e.g. `Kanne.daq` for Kamiokanne and `Cosmo.daq` for a run with
+the CosMo panels.
 
 The  `.yaml` files specify configurations for the oscilloscope, the BufferManager and the Pulse Filter. Here is the example to run with Kamiokanne:
 
@@ -158,10 +164,11 @@ logging level:
     LogFile: BMsum # write log-file entries with current statistics
 
 The configuration for running with the CosMO detectors or Kamiokanne
-are specified in the PulseFilter configuration file. It contains 
+are specified in the PulseFilter configuration file. It contains
 the specification of desired output files, the pulse shapes and
 pulse heights for every connected channel, the display modules
-to be started and and the definition of real-time histograms for pulse heights, muon rate and muon life-time. An example is shown
+to be started and and the definition of real-time histograms for
+pulse heights, muon rate and muon life-time. An example is shown
 here: 
 
     # file PFKanne.yaml
@@ -217,8 +224,9 @@ The directory `./output` contains the results from a long run of almost
 20 days with the Kamiokanne detector and a one-day run with the CosMO
 panels. The compressed file `rawDP_<date>.dat.zip` contains the 
 raw wave forms of identified double-pulses in `yaml`-format. The
-script `plotDoublePulses.py` can be used to read the unzipped file and to
-produce graphical displays of the waveforms. These pictures are also contained in the compressed file `dpFigs-<date>.zip`. 
+scripts `plotDoublePulses.py` and `makeFigs.py` can be used to read
+the zipped file and to produce graphical displays or images in `.png` 
+format of the waveforms.
 
 The parameters of events containing double-pulses are stored in file
 dpKanne2_180403.dat. An unbinned log-likelihood fit of measured

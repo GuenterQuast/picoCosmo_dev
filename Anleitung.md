@@ -15,7 +15,8 @@ Kaffeekanne mit aufgesetzter Photoröhre bestehende Wasser-Cherenkov-Zähler
 und einigen 10 bis 100 mV Pulshöhe, die mit einem Oszillographen sichtbar
 gemacht werden können.
 
-Moderne USB-Oszilloskope wie das PicoScope der Firma PichoTechnology, siehe <http://www.picotech.com>, erlauben es, die Pulsformen nicht nur
+Moderne USB-Oszilloskope wie das PicoScope der Firma PichoTechnology,
+siehe <http://www.picotech.com>, erlauben es, die Pulsformen nicht nur
 anzuzeigen, sondern auch in Echtzeit an einen Commputer zu exportieren, mit
 dem sie dann aufgezeichnet, angezeigt und analysiert werden können.
 Diesem Zweck dient das hier beschriebene Projekt "`picoCosmo`". Es ist auf
@@ -85,8 +86,9 @@ Der Code kann entweder auf der Linux-Kommandozeile über das
 Script `runCosmo.py` oder über eine grafische Oberfläche,
 `CosmoGui.py`, gestartet werden.
 
-Die benötigten Information zur Konfiguration des USB-Oszilloskops, der Pufferverwaltung zur Bereitstellung der Daten und die Pulsanalyse werden
-in Konfigurationsdateien im `.yaml`-Format bereit gestellt.
+Die benötigten Information zur Konfiguration des USB-Oszilloskops,
+der Pufferverwaltung zur Bereitstellung der Daten und die Pulsanalyse
+werden in Konfigurationsdateien im `.yaml`-Format bereit gestellt.
 Die für eine spezielle Konfiguration verwendeten Dateien sind in
 einer Datei im `.yaml`-Format mit der Endung `.daq` enthalten.
 
@@ -144,17 +146,21 @@ Wie oben beschrieben, wir die Datanaufnahme und Analyse entweder
 über die grafische Oberfläche (`./CosmoGui.py xxx.daq`) oder
 über die Kommandozeile (`./runCosmo xxxx.daq` gestartet.
 
-Nach dem Start eines Runs startet die grafische Oberfläche des
-Puffer-Managers und die in der Konfiguration festgelegten
-Echtzeit-Anzeigen. Über die Kontrollflächen des Puffer-Managers kann die Datennahme pausiert (`Pause`), wieder aufgenommen (`Resume`) oder beendet werden kann (`Stop` und `EndRun`). In gestopptem Zustand
-werden die Ausgabedateien geschlossen, aber alle Fenster bleiben noch geöffnet, so dass Grafiken betrachtet  oder gespeichert und statistische Information ausgewertet werden können. Wird der Run beendet, verschwinden
-alle Fenster.
+Nach dem Start eines Runs startet die grafische Oberfläche des Puffer-Managers
+und die in der Konfiguration festgelegten Echtzeit-Anzeigen. Über die
+Kontrollflächen des Puffer-Managers kann die Datennahme pausiert (`Pause`),
+wieder aufgenommen (`Resume`) oder beendet werden kann (`Stop` und `EndRun`).
+In gestopptem Zustand werden die Ausgabedateien geschlossen, aber alle Fenster
+bleiben noch geöffnet, so dass Grafiken betrachtet  oder gespeichert und
+statistische Information ausgewertet werden können. Wird der Run beendet,
+verschwinden alle Fenster.
 
-Eine Hilfsanwendung,  `plotDoublePulses.py` ermöglicht das Einlesen
-der abgespeicherten Pulsformen und deren Anzeige als Grafiken.
-Code zum Speichern im `.png`-Format ist enthalten, aber auskommentiert.
+Zwei Hilfsanwendungen, `plotDoublePulses.py` und `makeFigs.py` ermöglichen
+das Einlesen der abgespeicherten Pulsformen und deren graphische Anzeige
+bzw. Abspeichern als Grafikdateien im `.png`-Format.
 
-Die Konfigurationsdateien für das USB-Oszilloskop, den Puffer-Manager und die Signalanalyse werden sind in jeweils einer  Datei vom  Typ `.yaml` im
+Die Konfigurationsdateien für das USB-Oszilloskop, den Puffer-Manager und
+die Signalanalyse sind in jeweils einer  Datei vom  Typ `.yaml` im
 Unterverzeichnis `config/` festgelegt. Die Dateinamen sind in Dateien vom
 Typ `.daq` enthalten, also `Kanne.daq` für  Kamiokanne and `Cosmo.daq` für
 die CosMO-Panels.
@@ -163,11 +169,11 @@ Die folgenden Beispiele gelten für den Kamiokanne-Detektor:
 
     # file Kanne.daq
     # --------------------
-    # configuration files for Kamiokanne 
+    # configuration files for Kamiokanne
 
     DeviceFile: config/PMpulse.yaml   # Oscilloscope configuration file
     BMfile:     config/BMconfig.yaml  # Buffer Manager configuration
-    PFfile:     config/PFconfig.yaml  # Pulse Filter Configuration 
+    PFfile:     config/PFconfig.yaml  # Pulse Filter Configuration
 
 Die  Oszilloskop-Konfiguration enthält Informationen zum Typ
 des Oszilloskops, den aktiven Kanälen und zum Trigger:
@@ -265,12 +271,13 @@ Das Verzeichnis `./output` enthält Ergebnisse einer Langzeitmessung
 zwei Cosmo-Panels. 
 
 Die gepackte Datei `rawDP_<date>.dat.zip` enthält die Rohdaten der
-aufgezeichneten Pulsformen für erkannte Doppelpulse. Das Script
-`plotDoublePulses.py` erlaubt das Einlesen der entpackten Datei und
-die grafische Darstellung der Pulse. Die Bilder sind in der gepackten
-Datei `dpFigs-<date>.zip` enthalten. Die aus den Doppelpulsen bestimmten
-Lebensdauern sind in der Datei dpKanne2_180403.dat enthalten. Eine
-Anpassung einer Exponentialfunktion an gemessene Lebensdauern zwischen
-1.5 µs and 15. µs kann mit dem Skript `fit_dpData.py` ausgeführt
-werden; das Ergebnis zeigt die Grafikdatei `life-ofMU_180403.png`. 
+aufgezeichneten Pulsformen für erkannte Doppelpulse. Die Scripte
+`plotDoublePulses.py` und `makeFigs.py` erlaubt das Einlesen der
+gepackten Datei und die grafische Darstellung der Doppelpulse bzw.
+die Speicherung als Grafikdateien im `.png`-Format. Die aus den
+Doppelpulsen bestimmten Lebensdauern sind in der Datei
+dpKanne2_180403.dat enthalten. Eine Anpassung einer Exponentialfunktion
+an gemessene Lebensdauern zwischen 1.5 µs and 15. µs kann mit dem Skript
+`fit_dpData.py` ausgeführt werden; das Ergebnis zeigt die Grafikdatei
+`life-ofMU_180403.png`.
 
