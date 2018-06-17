@@ -9,6 +9,7 @@ from __future__ import print_function, division, unicode_literals
 from __future__ import absolute_import
 
 import sys, time, yaml, numpy as np
+import zipfile
 
 import matplotlib
 matplotlib.use('TkAgg')
@@ -18,12 +19,15 @@ import matplotlib.pyplot as plt, matplotlib.animation as anim
 from picodaqa.Oscilloscope import *
 
 def readblock():
-# read data sequentially from input file
+# read data sequentially from input file (utf-8 or unpacked zip)
 #   end of block marked by ']]\n'
   global f
   txt = ''
   while True:
-    l = f.readline()
+    if zipmode == True:
+      l = f.readline().decode('utf-8')
+    else:
+      l = f.readline()
     if (not l):  # end of file 
       # print('   end of file')
       return ''
@@ -36,15 +40,25 @@ if __name__ == "__main__": # -----------------------------
 
   print('\n*==* script ' + sys.argv[0] + ' running \n')
   if len(sys.argv)==2:
-    fnam = sys.argv[1]
+    fname = sys.argv[1]
   else: 
-    fnam = 'rawDPtest.dat'
-  print('    input from file ' + fnam)
+    fname = 'rawDPtest.dat'
+  print('    input from file ' + fname)
 
   try:
-    f = open(fnam, 'r')
+    # read from zip file
+    if fname.split('.')[-1]=='zip':
+      zipmode = True
+      zf = zipfile.ZipFile(fname, 'r')
+      fnam = zf.namelist()[0]  # first file
+      f = zf.open(fnam)
+      print('    reading from packed file ' + fnam)
+    else:
+    # read from unpacked file
+      zipmode = False
+      f = open(fname, 'r')
   except:
-    print('     failed to open input file ' + fnam)
+    print(' !!! failed to open input file ' + fname)
     exit(1)
 
   # read first block from file
@@ -56,7 +70,7 @@ if __name__ == "__main__": # -----------------------------
     print('     failed read oscillocope configuration ')
     exit(1)
 
-  print("*= start animation")
+  print(" ** start animation")
   plt.ion()  
   # initialize oscilloscope display
   Osci = Oscilloscope(conf, 'DoublePulse') 
@@ -70,10 +84,9 @@ if __name__ == "__main__": # -----------------------------
     for d in data:
       cnt += 1
       evt = (3, cnt, time.time(), d)
-      print("event %i"%(cnt))
+      print(" displaying event %i"%(cnt))
       Osci(evt)
       figOs.canvas.draw()
-##    figOs.savefig('DPfig%03i'%(cnt)+'.png')
       time.sleep(twait)
 
     # read next block
@@ -84,4 +97,4 @@ if __name__ == "__main__": # -----------------------------
     data = obj['data']
 
   f.close()
-  print("*= end")
+  print(sys.argv[0] + " end *==*")
